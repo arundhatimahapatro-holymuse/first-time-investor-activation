@@ -136,6 +136,8 @@ A guided on-ramp, fully optional/skippable so the self-directed power-user exper
 
 ## 9. Six-month roadmap
 
+<img src="assets/roadmap-gantt.svg" alt="Six month roadmap Gantt chart: Foundation, MVP, Iterate, and Re-engagement run months 1-4 with no AI; bounded AI enters in the Pilot phase, month 5, and continues through Scale, month 6." width="100%" />
+
 | Phase | Month | Focus | Ships | AI involved? |
 |---|---|---|---|---|
 | 0 · Foundation | 1 | Instrumentation & research | Baseline activation-rate measurement, deposit→first-trade event tracking, 10–15 first-timer interviews, Varsity content audit, compliance review of guided-path language | No |

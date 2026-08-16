@@ -1,0 +1,45 @@
+<svg viewBox="0 0 900 178" role="img" aria-label="Six month roadmap Gantt chart, AI involvement begins month five" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="900" height="178" fill="#FFFFFF"/>
+  <text x="0" y="14" font-family="ui-monospace, 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="0.06em" fill="#6E7280">MONTH</text>
+  <g font-family="ui-monospace, 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace" font-size="10" fill="#6E7280">
+    <text x="141" y="14" text-anchor="middle">1</text>
+    <text x="271" y="14" text-anchor="middle">2</text>
+    <text x="401" y="14" text-anchor="middle">3</text>
+    <text x="531" y="14" text-anchor="middle">4</text>
+    <text x="661" y="14" text-anchor="middle">5</text>
+    <text x="791" y="14" text-anchor="middle">6</text>
+  </g>
+  <g>
+    <rect x="80" y="24" width="122" height="52" rx="6" fill="#9A5B14"/>
+    <rect x="210" y="24" width="122" height="52" rx="6" fill="#9A5B14"/>
+    <rect x="340" y="24" width="122" height="52" rx="6" fill="#9A5B14"/>
+    <rect x="470" y="24" width="122" height="52" rx="6" fill="#9A5B14"/>
+    <rect x="600" y="24" width="122" height="52" rx="6" fill="#1E7B4D"/>
+    <rect x="730" y="24" width="122" height="52" rx="6" fill="#1E7B4D"/>
+  </g>
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" fill="#FFFFFF">
+    <text x="94" y="46" font-size="12" font-weight="700">Foundation</text>
+    <text x="94" y="61" font-size="9.5" opacity="0.9">Instrumentation</text>
+    <text x="224" y="46" font-size="12" font-weight="700">MVP</text>
+    <text x="224" y="61" font-size="9.5" opacity="0.9">Ship the on-ramp</text>
+    <text x="354" y="46" font-size="12" font-weight="700">Iterate</text>
+    <text x="354" y="61" font-size="9.5" opacity="0.9">Measure &amp; fix</text>
+    <text x="484" y="46" font-size="12" font-weight="700">Re-engage</text>
+    <text x="484" y="61" font-size="9.5" opacity="0.9">Bring back dormant</text>
+    <text x="614" y="46" font-size="12" font-weight="700">Pilot</text>
+    <text x="614" y="61" font-size="9.5" opacity="0.9">Bounded AI</text>
+    <text x="744" y="46" font-size="12" font-weight="700">Scale</text>
+    <text x="744" y="61" font-size="9.5" opacity="0.9">Institutionalize</text>
+  </g>
+  <line x1="600" y1="24" x2="600" y2="122" stroke="#1E7B4D" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <text x="606" y="94" font-family="ui-monospace, 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace" font-size="10" fill="#1E7B4D">AI enters here</text>
+  <text x="0" y="112" font-family="ui-monospace, 'SF Mono', 'Roboto Mono', Menlo, Consolas, monospace" font-size="10" letter-spacing="0.06em" fill="#6E7280">AI ON</text>
+  <rect x="80" y="100" width="772" height="14" rx="7" fill="none" stroke="#DBDEE4" stroke-width="1"/>
+  <rect x="600" y="100" width="252" height="14" rx="7" fill="#1E7B4D"/>
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="11" fill="#4A4E5A">
+    <rect x="80" y="148" width="12" height="12" rx="3" fill="#9A5B14"/>
+    <text x="98" y="158">No AI — deterministic UX &amp; content</text>
+    <rect x="360" y="148" width="12" height="12" rx="3" fill="#1E7B4D"/>
+    <text x="378" y="158">Bounded AI — narrow, supporting role only</text>
+  </g>
+</svg>
