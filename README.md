@@ -158,7 +158,7 @@ AI enters deliberately late — once the deterministic fix is proven, not as a s
 
 ```
 ├── README.md              # this file — brief, journey, full solution, roadmap
-├── deck/index.html         # 12-slide deck — open in a browser, Cmd/Ctrl+P to export as PDF
+├── deck/index.html         # 13-slide deck — open in a browser, Cmd/Ctrl+P to export as PDF
 ├── prototype/index.html    # clickable prototype of the "First ₹500" on-ramp
 └── assets/screens/          # real Kite app screens pulled from a live walkthrough recording
 ```

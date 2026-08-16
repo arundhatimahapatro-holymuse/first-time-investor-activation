@@ -129,6 +129,8 @@
 
   /* ---- journey screens ---- */
   .screens-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: start; }
+  .screens-row-5 { grid-template-columns: repeat(5, 1fr); gap: 1rem; }
+  .screens-row-5 .cap-text { font-size: 0.78rem; }
   .screen-card { display: flex; flex-direction: column; gap: 0.7rem; }
   .screen-frame { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--paper); }
   .screen-frame img { display: block; width: 100%; height: auto; }
@@ -249,20 +251,20 @@
 
   <!-- 1: TITLE -->
   <section class="slide title-slide">
-    <div class="kicker"><span>Zerodha · PM II Candidate Assignment</span><span class="tag">01 / 12</span></div>
+    <div class="kicker"><span>Zerodha · PM II Candidate Assignment</span><span class="tag">01 / 13</span></div>
     <div class="eyebrow">Case study</div>
     <h1>First-Time Investor Activation</h1>
     <p class="sub">Why deposits stall before the first trade — and why the fix is mostly not AI.</p>
     <div class="title-meta">
       <div>Prepared by<span>Arundhati Mahapatro</span></div>
-      <div>Format<span>Product case study · 12 slides</span></div>
+      <div>Format<span>Product case study · 13 slides</span></div>
       <div>Core question<span>Is AI the right lens for this problem?</span></div>
     </div>
   </section>
 
   <!-- 2: PROBLEM IN NUMBERS -->
   <section class="slide">
-    <div class="kicker"><span>Problem definition</span><span class="tag">02 / 12</span></div>
+    <div class="kicker"><span>Problem definition</span><span class="tag">02 / 13</span></div>
     <h2>Money moves in. Momentum doesn't.</h2>
     <p class="dek">A first-time investor completes KYC, deposits money — and a large share never place a first trade. This is not a Zerodha-specific quirk; it's a structural pattern across Indian retail investing.</p>
     <div class="body">
@@ -277,7 +279,7 @@
 
   <!-- 3: REAL JOURNEY -->
   <section class="slide">
-    <div class="kicker"><span>Field research</span><span class="tag">03 / 12</span></div>
+    <div class="kicker"><span>Field research</span><span class="tag">03 / 13</span></div>
     <h2>What the app actually shows on day one</h2>
     <p class="dek">Walked a live Kite account rather than assume the flow. Three screens tell most of the story.</p>
     <div class="body">
@@ -303,7 +305,7 @@
 
   <!-- 4: ROOT CAUSES -->
   <section class="slide">
-    <div class="kicker"><span>Diagnosis</span><span class="tag">04 / 12</span></div>
+    <div class="kicker"><span>Diagnosis</span><span class="tag">04 / 13</span></div>
     <h2>Five reasons the freeze happens</h2>
     <p class="dek">Ranked by leverage — the top two explain most of the drop-off.</p>
     <div class="body">
@@ -319,7 +321,7 @@
 
   <!-- 5: WHY IT MATTERS -->
   <section class="slide">
-    <div class="kicker"><span>Stakes</span><span class="tag">05 / 12</span></div>
+    <div class="kicker"><span>Stakes</span><span class="tag">05 / 13</span></div>
     <h2>Why this is worth solving deliberately</h2>
     <div class="body">
       <div class="two-col">
@@ -345,7 +347,7 @@
 
   <!-- 6: AI VERDICT -->
   <section class="slide">
-    <div class="kicker"><span>AI evaluation</span><span class="tag">06 / 12</span></div>
+    <div class="kicker"><span>AI evaluation</span><span class="tag">06 / 13</span></div>
     <h2>Is AI the right lens? The explicit call.</h2>
     <div class="body">
       <div class="verdict-box">
@@ -362,7 +364,7 @@
 
   <!-- 7: WHERE AI HELPS -->
   <section class="slide">
-    <div class="kicker"><span>AI evaluation</span><span class="tag">07 / 12</span></div>
+    <div class="kicker"><span>AI evaluation</span><span class="tag">07 / 13</span></div>
     <h2>Where AI earns its place — tightly bounded</h2>
     <p class="dek">Only after the deterministic fix ships. Each use has a hard-coded line it must never cross.</p>
     <div class="body">
@@ -379,7 +381,7 @@
 
   <!-- 8: TARGET USER -->
   <section class="slide">
-    <div class="kicker"><span>Target user</span><span class="tag">08 / 12</span></div>
+    <div class="kicker"><span>Target user</span><span class="tag">08 / 13</span></div>
     <h2>Who this is designed for</h2>
     <div class="body">
       <div class="persona-wrap">
@@ -404,7 +406,7 @@
 
   <!-- 9: SOLUTION -->
   <section class="slide">
-    <div class="kicker"><span>Solution</span><span class="tag">09 / 12</span></div>
+    <div class="kicker"><span>Solution</span><span class="tag">09 / 13</span></div>
     <h2>"First ₹500" — a guided on-ramp</h2>
     <p class="dek">Fully optional and dismissible — the self-directed power-user flow is untouched.</p>
     <div class="body">
@@ -420,9 +422,46 @@
     </div>
   </section>
 
-  <!-- 10: TRADEOFFS -->
+  <!-- 10: SOLUTION IN PRODUCT -->
   <section class="slide">
-    <div class="kicker"><span>Trade-offs &amp; risks</span><span class="tag">10 / 12</span></div>
+    <div class="kicker"><span>Solution, in the product</span><span class="tag">10 / 13</span></div>
+    <h2>Not a concept — a working prototype</h2>
+    <p class="dek">Five real screens from the clickable prototype, walking the same path a first-timer would tap through.</p>
+    <div class="body">
+      <div class="screens-row screens-row-5">
+        <div class="screen-card">
+          <div class="screen-frame"><img src="../assets/screens/proto_wl.png" alt="Start Here card on the watchlist home screen" /></div>
+          <div class="cap-label">1 &middot; Start Here card</div>
+          <div class="cap-text">Appears once, right after deposit. Dismissible — the self-directed flow stays untouched.</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-frame"><img src="../assets/screens/proto_q1-selected.png" alt="Multi-select intent question, two options selected" /></div>
+          <div class="cap-label">2 &middot; Intent, multi-select</div>
+          <div class="cap-text">Routing only — motivations aren't exclusive, and no security is ever named here.</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-frame"><img src="../assets/screens/proto_rec.png" alt="Recommendation screen suggesting a 500 rupee index fund SIP" /></div>
+          <div class="cap-label">3 &middot; One tiny first action</div>
+          <div class="cap-text">₹500 index-fund SIP — small, reversible, framed as what similar first-timers do.</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-frame"><img src="../assets/screens/proto_setup.png" alt="SIP setup confirmation form" /></div>
+          <div class="cap-label">4 &middot; A form, not a decision</div>
+          <div class="cap-text">The hard thinking already happened, in a lower-stakes place.</div>
+        </div>
+        <div class="screen-card">
+          <div class="screen-frame"><img src="../assets/screens/proto_confirm.png" alt="Confirmation screen showing the SIP is active" /></div>
+          <div class="cap-label">5 &middot; Close the loop</div>
+          <div class="cap-text">Confirms, then teases one small lesson — momentum without pressure.</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem; margin-top:0.3rem;">Also in the flow (not pictured): each lesson opens as short, swipeable cards instead of a link out to Varsity, and high-deposit users who stay inactive past 14 days get a proactive human callback.</p>
+    </div>
+  </section>
+
+  <!-- 11: TRADEOFFS -->
+  <section class="slide">
+    <div class="kicker"><span>Trade-offs &amp; risks</span><span class="tag">11 / 13</span></div>
     <h2>What we're deliberately trading against</h2>
     <div class="body">
       <div class="tradeoff-grid">
@@ -436,7 +475,7 @@
 
   <!-- 11: METRICS -->
   <section class="slide">
-    <div class="kicker"><span>Success measurement</span><span class="tag">11 / 12</span></div>
+    <div class="kicker"><span>Success measurement</span><span class="tag">12 / 13</span></div>
     <h2>How we'll know it worked</h2>
     <div class="body">
       <div class="metric-hero">
@@ -468,7 +507,7 @@
 
   <!-- 12: ROADMAP -->
   <section class="slide">
-    <div class="kicker"><span>Execution</span><span class="tag">12 / 12</span></div>
+    <div class="kicker"><span>Execution</span><span class="tag">13 / 13</span></div>
     <h2>Six-month roadmap</h2>
     <p class="dek">AI enters deliberately late — once the deterministic fix is proven, not as a substitute for it.</p>
     <div class="body">
@@ -556,7 +595,7 @@
 
 <div class="nav-dock">
   <button id="prevBtn" aria-label="Previous slide">&larr;</button>
-  <span class="count" id="slideCount">1 / 12</span>
+  <span class="count" id="slideCount">1 / 13</span>
   <button id="nextBtn" aria-label="Next slide">&rarr;</button>
   <button class="print-btn" id="printBtn" aria-label="Export as PDF">Export PDF</button>
 </div>

@@ -111,24 +111,35 @@
   .bottom-nav .nav-item.active .dot-icon { opacity: 0.9; }
 
   .q-screen { padding: 1rem 1.2rem 5rem; }
-  .q-screen .back { font-size: 0.82rem; color: #6E7280; }
   .q-screen .q-progress { font-family: var(--mono); font-size: 0.7rem; color: #9A9EA8; margin-top: 0.6rem; }
   .q-screen h3 { font-size: 1.3rem; margin: 0.6rem 0 1.2rem; line-height: 1.35; }
-  .opt-card { border: 1.5px solid #E1E3E8; border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 0.8rem; cursor: pointer; transition: border-color .15s; }
+  .back { font-size: 0.82rem; color: #6E7280; cursor: pointer; display: inline-flex; align-items: center; gap: 0.3rem; user-select: none; }
+  .back:active { opacity: 0.55; }
+  .opt-card { border: 1.5px solid #E1E3E8; border-radius: 10px; padding: 0.9rem 1rem; margin-bottom: 0.8rem; cursor: pointer; transition: border-color .15s, background-color .15s, transform .12s ease; }
   .opt-card:hover { border-color: #33459B; }
+  .opt-card:active { transform: scale(0.98); }
+  .opt-card.selected { border-color: #33459B; background: #F2F4FC; }
+  .opt-card .opt-row { display: flex; align-items: center; justify-content: space-between; gap: 0.8rem; }
   .opt-card .opt-title { font-weight: 700; font-size: 0.92rem; }
   .opt-card .opt-sub { font-size: 0.78rem; color: #8A8E99; margin-top: 0.2rem; }
+  .opt-check { flex: none; width: 20px; height: 20px; border-radius: 50%; border: 1.5px solid #C7CBE0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: transparent; transition: all .15s; }
+  .opt-card.selected .opt-check { background: #33459B; border-color: #33459B; color: #fff; }
 
   .rec-screen { padding: 1rem 1.2rem 5rem; }
   .rec-screen .tag { font-family: var(--mono); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: #33459B; }
   .rec-screen h3 { font-size: 1.25rem; margin: 0.5rem 0 1.1rem; line-height: 1.3; }
+  .rec-screen .back { margin-bottom: 0.4rem; }
   .rec-card { border: 1.5px solid #33459B; background: #F2F4FC; border-radius: 12px; padding: 1rem 1.1rem; }
   .rec-card .rc-amt { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; }
   .rec-card .rc-name { font-size: 0.88rem; font-weight: 600; margin-top: 0.2rem; }
   .rec-card .rc-desc { font-size: 0.8rem; color: #5A5E6A; margin-top: 0.5rem; line-height: 1.5; }
-  .rec-card button.primary-full { width: 100%; margin-top: 1rem; background: #33459B; color: #fff; border: none; border-radius: 8px; padding: 0.75rem; font-weight: 700; font-size: 0.88rem; cursor: pointer; }
   .alt-links { margin-top: 1.1rem; display: flex; flex-direction: column; gap: 0.6rem; }
   .alt-links a { font-size: 0.82rem; color: #33459B; text-decoration: none; border-bottom: 1px dashed #A9B3E0; padding-bottom: 1px; cursor: pointer; }
+
+  .lesson-card { background: #F7F5EE; border-radius: 12px; padding: 1.15rem 1.2rem; font-size: 0.95rem; line-height: 1.65; color: #2A2E38; margin-top: 0.9rem; min-height: 132px; display: flex; align-items: center; }
+  .lesson-dots { display: flex; gap: 0.4rem; justify-content: center; margin: 1.1rem 0 1.3rem; }
+  .lesson-dots span { width: 6px; height: 6px; border-radius: 3px; background: #DCD8CF; transition: all .2s; }
+  .lesson-dots span.on { background: #33459B; width: 18px; }
 
   .setup-screen { padding: 1rem 1.2rem 5rem; }
   .setup-screen h3 { font-size: 1.2rem; margin: 0.6rem 0 1.2rem; }
@@ -136,18 +147,35 @@
   .setup-row:first-of-type { border-top: none; }
   .setup-row .label { color: #8A8E99; }
   .setup-row .val { font-weight: 600; }
-  .setup-screen button.primary-full { width: 100%; margin-top: 1.6rem; background: #33459B; color: #fff; border: none; border-radius: 8px; padding: 0.8rem; font-weight: 700; font-size: 0.9rem; cursor: pointer; }
   .disclaimer { font-size: 0.72rem; color: #9A9EA8; margin-top: 0.8rem; line-height: 1.5; }
 
-  .confirm-screen { padding: 2.2rem 1.3rem 5rem; text-align: center; }
-  .confirm-badge { width: 52px; height: 52px; border-radius: 50%; background: #E4F3EA; color: #1E7B4D; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 1.4rem; }
+  button.primary-full { width: 100%; margin-top: 1rem; background: #33459B; color: #fff; border: none; border-radius: 8px; padding: 0.78rem; font-weight: 700; font-size: 0.88rem; cursor: pointer; transition: transform .12s ease, opacity .15s; }
+  button.primary-full:active { transform: scale(0.97); }
+  button.primary-full:disabled { opacity: 0.4; cursor: default; }
+  button.primary-full:disabled:active { transform: none; }
+
+  .confirm-screen { padding: 2.2rem 1.3rem 5rem; text-align: center; position: relative; overflow: hidden; }
+  .confirm-badge { width: 52px; height: 52px; border-radius: 50%; background: #E4F3EA; color: #1E7B4D; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-size: 1.4rem; animation: popIn .5s cubic-bezier(.34,1.56,.64,1); position: relative; z-index: 1; }
   .confirm-screen h3 { font-size: 1.2rem; margin: 1rem 0 0.4rem; }
   .confirm-screen p { font-size: 0.85rem; color: #6E7280; line-height: 1.55; }
   .receipt { text-align: left; border: 1px solid #EEF0F3; border-radius: 10px; padding: 0.9rem 1rem; margin-top: 1.2rem; font-size: 0.84rem; }
   .receipt div { display: flex; justify-content: space-between; padding: 0.25rem 0; }
-  .learn-teaser { text-align: left; margin-top: 1.1rem; background: #F7F5EE; border-radius: 10px; padding: 0.8rem 0.9rem; font-size: 0.8rem; color: #5A5E6A; }
+  .learn-teaser { text-align: left; margin-top: 1.1rem; background: #F7F5EE; border-radius: 10px; padding: 0.8rem 0.9rem; font-size: 0.8rem; color: #5A5E6A; cursor: pointer; transition: transform .12s ease; }
+  .learn-teaser:active { transform: scale(0.98); }
   .learn-teaser b { color: #14161C; display: block; margin-bottom: 0.2rem; font-size: 0.82rem; }
-  .confirm-screen button.primary-full { width: 100%; margin-top: 1.3rem; background: #33459B; color: #fff; border: none; border-radius: 8px; padding: 0.8rem; font-weight: 700; font-size: 0.88rem; cursor: pointer; }
+
+  .confetti { position: absolute; top: 32%; left: 50%; width: 0; height: 0; pointer-events: none; }
+  .confetti span { position: absolute; width: 6px; height: 6px; border-radius: 50%; opacity: 0; animation: burst .75s ease-out forwards; }
+  @keyframes popIn { 0% { transform: scale(0); } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
+  @keyframes burst { 0% { opacity: 1; transform: translate(0,0) scale(1); } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.3); } }
+
+  @keyframes screenIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .anim-in { animation: screenIn .3s ease; }
+  @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.45); } 50% { box-shadow: 0 0 0 7px rgba(255,255,255,0); } }
+  .start-card button.primary { animation: pulseGlow 2.4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .anim-in, .confirm-badge, .confetti span, .start-card button.primary { animation: none !important; }
+  }
 
   .real-shot { width: 100%; height: 100%; object-fit: cover; }
   .real-wrap { position: relative; height: 100%; }
@@ -241,16 +269,31 @@ function watchlistScreen(withCard) {
   `;
 }
 
+const goalOptions = [
+  ['long', 'Long-term growth', 'Building wealth over years, not days'],
+  ['learn', 'Learning the ropes', 'Trying investing out, low stakes'],
+  ['short', 'A short-term goal', 'Saving toward something specific'],
+];
+let goalSelections = new Set();
+function toggleGoal(key) {
+  if (goalSelections.has(key)) goalSelections.delete(key); else goalSelections.add(key);
+  renderProposed('q1');
+}
 function q1Screen() {
   return `
     ${statusbar()}
     <div class="q-screen">
       <div class="back" onclick="go('wl')">&larr; Back</div>
-      <div class="q-progress">QUESTION 1 OF 2</div>
+      <div class="q-progress">QUESTION 1 OF 2 &middot; PICK ALL THAT APPLY</div>
       <h3>What's this money for?</h3>
-      <div class="opt-card" onclick="go('q2')"><div class="opt-title">Long-term growth</div><div class="opt-sub">Building wealth over years, not days</div></div>
-      <div class="opt-card" onclick="go('q2')"><div class="opt-title">Learning the ropes</div><div class="opt-sub">Trying investing out, low stakes</div></div>
-      <div class="opt-card" onclick="go('q2')"><div class="opt-title">A short-term goal</div><div class="opt-sub">Saving toward something specific</div></div>
+      ${goalOptions.map(([key, title, sub]) => `
+        <div class="opt-card ${goalSelections.has(key) ? 'selected' : ''}" onclick="toggleGoal('${key}')">
+          <div class="opt-row">
+            <div><div class="opt-title">${title}</div><div class="opt-sub">${sub}</div></div>
+            <div class="opt-check">${goalSelections.has(key) ? '&check;' : ''}</div>
+          </div>
+        </div>`).join('')}
+      <button class="primary-full" ${goalSelections.size === 0 ? 'disabled' : ''} onclick="go('q2')">${goalSelections.size ? `Continue (${goalSelections.size} selected)` : 'Select at least one'}</button>
     </div>
   `;
 }
@@ -272,6 +315,7 @@ function recScreen() {
   return `
     ${statusbar()}
     <div class="rec-screen">
+      <div class="back" onclick="go('q2')">&larr; Back</div>
       <div class="tag">Based on your answers</div>
       <h3>Most first-timers like you start here</h3>
       <div class="rec-card">
@@ -293,6 +337,7 @@ function selfDirectedScreen() {
   return `
     ${statusbar()}
     <div class="rec-screen">
+      <div class="back" onclick="go('q2')">&larr; Back</div>
       <div class="tag">Informational — not a recommendation</div>
       <h3>What other first-time investors hold</h3>
       ${rows.map(([n,d]) => `<div class="opt-card" style="cursor:default;"><div class="opt-title">${n}</div><div class="opt-sub">${d}</div></div>`).join('')}
@@ -301,16 +346,54 @@ function selfDirectedScreen() {
   `;
 }
 
-function learnScreen() {
+const lessons = {
+  sip: { title: 'What a SIP actually is', cards: [
+    "SIP = Systematic Investment Plan. You invest a fixed amount at a fixed interval — say ₹500 every month — instead of one lump sum.",
+    "It buys more units when prices are low, fewer when high. Over time this averages out your cost, so you never have to time the market.",
+  ]},
+  index: { title: 'Index funds vs. single stocks', cards: [
+    "A single stock ties your money to one company's fortunes. If it has a bad year, so does all your money.",
+    "An index fund like Nifty 50 spreads your money across the top 50 companies at once — one bad company barely moves the needle.",
+  ]},
+  slow: { title: 'Why small and slow beats big and fast', cards: [
+    "Investing ₹500 you can afford to lose teaches you the ropes without real financial pain.",
+    "Consistency compounds. A small SIP kept up for years usually beats a big one-time bet you panic-sell.",
+  ]},
+};
+let lessonState = { key: 'sip', card: 0 };
+function openLesson(key) { lessonState = { key, card: 0 }; go('lesson'); }
+function nextLessonCard() {
+  const total = lessons[lessonState.key].cards.length;
+  lessonState.card = Math.min(lessonState.card + 1, total - 1);
+  go('lesson');
+}
+function lessonScreen() {
+  const keys = Object.keys(lessons);
+  const lesson = lessons[lessonState.key];
+  const isLast = lessonState.card === lesson.cards.length - 1;
   return `
     ${statusbar()}
     <div class="rec-screen">
+      <div class="back" onclick="go('learn')">&larr; Back</div>
+      <div class="tag">Lesson ${keys.indexOf(lessonState.key) + 1} of ${keys.length} &middot; card ${lessonState.card + 1} of ${lesson.cards.length}</div>
+      <h3>${lesson.title}</h3>
+      <div class="lesson-card">${lesson.cards[lessonState.card]}</div>
+      <div class="lesson-dots">${lesson.cards.map((_, i) => `<span class="${i === lessonState.card ? 'on' : ''}"></span>`).join('')}</div>
+      <button class="primary-full" onclick="${isLast ? "go('learn')" : 'nextLessonCard()'}">${isLast ? 'Done' : 'Next card'}</button>
+    </div>
+  `;
+}
+function learnScreen() {
+  const subs = { sip: '2 short cards', index: '2 short cards', slow: '2 short cards' };
+  return `
+    ${statusbar()}
+    <div class="rec-screen">
+      <div class="back" onclick="go('rec')">&larr; Back</div>
       <div class="tag">Varsity, in-context</div>
       <h3>3 things to know before you start</h3>
-      <div class="opt-card"><div class="opt-title">1. What a SIP actually is</div><div class="opt-sub">2 min read</div></div>
-      <div class="opt-card"><div class="opt-title">2. Index funds vs. single stocks</div><div class="opt-sub">3 min read</div></div>
-      <div class="opt-card"><div class="opt-title">3. Why small and slow beats big and fast</div><div class="opt-sub">2 min read</div></div>
-      <div class="alt-links"><a onclick="go('rec')">Back to starter suggestion</a></div>
+      <div class="opt-card" onclick="openLesson('sip')"><div class="opt-row"><div><div class="opt-title">1. What a SIP actually is</div><div class="opt-sub">${subs.sip}</div></div><div class="opt-check" style="color:#33459B; border:none;">&rsaquo;</div></div></div>
+      <div class="opt-card" onclick="openLesson('index')"><div class="opt-row"><div><div class="opt-title">2. Index funds vs. single stocks</div><div class="opt-sub">${subs.index}</div></div><div class="opt-check" style="color:#33459B; border:none;">&rsaquo;</div></div></div>
+      <div class="opt-card" onclick="openLesson('slow')"><div class="opt-row"><div><div class="opt-title">3. Why small and slow beats big and fast</div><div class="opt-sub">${subs.slow}</div></div><div class="opt-check" style="color:#33459B; border:none;">&rsaquo;</div></div></div>
     </div>
   `;
 }
@@ -331,10 +414,23 @@ function setupScreen() {
   `;
 }
 
+function confettiSpans() {
+  const colors = ['#33459B', '#1E7B4D', '#E3A857', '#8695E8'];
+  return Array.from({ length: 10 }).map((_, i) => {
+    const angle = (i / 10) * Math.PI * 2;
+    const dist = 60 + (i % 3) * 18;
+    const dx = Math.round(Math.cos(angle) * dist);
+    const dy = Math.round(Math.sin(angle) * dist);
+    const color = colors[i % colors.length];
+    const delay = (i % 4) * 0.04;
+    return `<span style="--dx:${dx}px; --dy:${dy}px; background:${color}; animation-delay:${delay}s;"></span>`;
+  }).join('');
+}
 function confirmScreen() {
   return `
     ${statusbar()}
     <div class="confirm-screen">
+      <div class="confetti">${confettiSpans()}</div>
       <div class="confirm-badge">✓</div>
       <h3>Your first SIP is live</h3>
       <p>₹500 will move into your Nifty 50 Index Fund every month, starting now.</p>
@@ -343,7 +439,7 @@ function confirmScreen() {
         <div><span>Fund</span><span>Nifty 50 Index</span></div>
         <div><span>Status</span><span style="color:#1E7B4D; font-weight:700;">Active</span></div>
       </div>
-      <div class="learn-teaser"><b>Up next</b>What a SIP actually is — 2 min read, whenever you're ready.</div>
+      <div class="learn-teaser" onclick="openLesson('sip')"><b>Up next</b>What a SIP actually is — 2 short cards, whenever you're ready.</div>
       <button class="primary-full" onclick="go('wl-skip')">Done</button>
     </div>
   `;
@@ -351,11 +447,12 @@ function confirmScreen() {
 
 const proposedRegistry = {
   wl: { render: () => watchlistScreen(true), info: { eyebrow: 'Step 1', title: 'Start Here card replaces silence', body: 'Same watchlist home — but a dismissible card gives the first-timer a visible next step the moment money lands. Skippable at every point; the self-directed flow is untouched.', tag: ['safe','Fully skippable'] } },
-  q1: { render: q1Screen, info: { eyebrow: 'Step 2', title: 'Intent check — routing, not advice', body: 'Two quick questions route to one of a few static, pre-built paths. This never asks about or recommends individual securities — it stays firmly on the "routing" side of the advice line.', tag: ['safe','No security named'] } },
+  q1: { render: q1Screen, info: { eyebrow: 'Step 2', title: 'Intent check — routing, not advice', body: 'Multi-select, because motivations aren\'t exclusive — someone can be building long-term wealth AND just trying investing out. Never asks about or recommends individual securities; stays firmly on the "routing" side of the advice line.', tag: ['safe','No security named'] } },
   q2: { render: q2Screen, info: { eyebrow: 'Step 2', title: 'Respecting the self-directed user', body: 'Choosing "I\'ll pick myself" routes to a factual, social-proof screen instead — never blocking the experienced user with hand-holding they didn\'t ask for.', tag: ['safe','Two real paths'] } },
   rec: { render: recScreen, info: { eyebrow: 'Step 3', title: 'One tiny, reversible first action', body: 'The suggested default is a ₹500 index-fund SIP — small enough that being "wrong" costs almost nothing, and framed as what similar first-timers do, not personal advice.', tag: ['safe','₹500, reversible'] } },
   selfdirected: { render: selfDirectedScreen, info: { eyebrow: 'Alternate path', title: 'Informational, explicitly labelled', body: 'For users who want to pick themselves, this shows what other investors hold — a factual, social-proof framing that stops short of "you should buy this."', tag: ['note','Not a recommendation'] } },
-  learn: { render: learnScreen, info: { eyebrow: 'Alternate path', title: 'Education inside the flow', body: 'Varsity content surfaced at the exact decision point, instead of a separate app the user has to remember exists.', tag: ['safe','In-context'] } },
+  learn: { render: learnScreen, info: { eyebrow: 'Alternate path', title: 'Education inside the flow', body: 'Varsity content surfaced at the exact decision point, instead of a separate app the user has to remember exists. Each lesson opens as a short, swipeable card stack — not a wall of text.', tag: ['safe','In-context'] } },
+  lesson: { render: lessonScreen, info: () => ({ eyebrow: 'In-context lesson', title: lessons[lessonState.key].title, body: 'Short, card-based — worked through in under a minute without ever leaving the flow. This is what "education in the flow" actually looks like, not a link out to a separate app.', tag: ['safe', `Card ${lessonState.card + 1} of ${lessons[lessonState.key].cards.length}`] }) },
   setup: { render: setupScreen, info: { eyebrow: 'Step 4', title: 'A form, not a decision', body: 'By this point the only remaining choice is "confirm" — all the hard thinking happened earlier, in a lower-stakes place.', tag: [] } },
   confirm: { render: confirmScreen, info: { eyebrow: 'Step 5', title: 'Close the loop, tease what\'s next', body: 'Confirms the action and offers one small next piece of learning — momentum without pressure.', tag: ['safe','Activated'] } },
   'wl-skip': { render: () => watchlistScreen(false), info: { eyebrow: 'Result', title: 'Back home — now with momentum', body: 'The Start Here card is gone, replaced by a quiet confirmation of what\'s active. The very next dormant-risk nudge (Day 1/3/7) now has nothing to say, because activation already happened.', tag: ['safe','Activated'] } },
@@ -388,7 +485,7 @@ function renderDots() {
 
 function renderCurrent() {
   const step = currentSteps[idx];
-  screenEl.innerHTML = step.render();
+  screenEl.innerHTML = `<div class="anim-in">${step.render()}</div>`;
   renderInfo(step.info);
   $('#prevBtn').disabled = idx === 0;
   $('#nextBtn').disabled = idx === currentSteps.length - 1;
@@ -398,8 +495,8 @@ function renderCurrent() {
 function renderProposed(key) {
   currentProposedKey = key;
   const step = proposedRegistry[key];
-  screenEl.innerHTML = step.render();
-  renderInfo(step.info);
+  screenEl.innerHTML = `<div class="anim-in">${step.render()}</div>`;
+  renderInfo(typeof step.info === 'function' ? step.info() : step.info);
   const linIdx = proposedOrder.indexOf(key);
   $('#prevBtn').disabled = linIdx <= 0;
   $('#nextBtn').disabled = linIdx === -1 || linIdx === proposedOrder.length - 1;
@@ -408,12 +505,18 @@ function renderProposed(key) {
 
 window.go = function(key) { renderProposed(key); };
 
+function resetProposedState() {
+  goalSelections = new Set();
+  branch = null;
+  lessonState = { key: 'sip', card: 0 };
+}
+
 function setMode(m) {
   mode = m;
   $('#btnCurrent').classList.toggle('active', m === 'current');
   $('#btnProposed').classList.toggle('active', m === 'proposed');
   if (m === 'current') { idx = 0; renderCurrent(); }
-  else { renderProposed('wl'); }
+  else { resetProposedState(); renderProposed('wl'); }
 }
 
 $('#btnCurrent').addEventListener('click', () => setMode('current'));
