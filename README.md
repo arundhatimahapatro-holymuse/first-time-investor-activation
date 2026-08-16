@@ -1,7 +1,10 @@
 # First-Time Investor Activation | Zerodha
 
 **PM II Candidate Assignment — Case Study**
-Author: Arundhati Mahapatro · [Slide deck](deck/index.html) · [Clickable prototype](prototype/index.html)
+Author: Arundhati Mahapatro
+
+**Live demo:** [Slide deck](https://arundhatimahapatro-holymuse.github.io/first-time-investor-activation/deck/) · [Clickable prototype](https://arundhatimahapatro-holymuse.github.io/first-time-investor-activation/prototype/)
+*(browsing the repo instead? [deck/index.html](deck/index.html) · [prototype/index.html](prototype/index.html))*
 
 ---
 
