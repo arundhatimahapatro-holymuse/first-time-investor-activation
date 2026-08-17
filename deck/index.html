@@ -144,10 +144,17 @@
 
   p { line-height: 1.6; color: var(--ink-soft); }
   a { color: var(--accent-ink); }
+  sup { font-family: var(--mono); font-size: 0.65em; color: var(--accent-ink); }
+  .sources { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-top: 0.9rem; line-height: 1.6; }
+  .sources sup { margin-right: 0.1rem; }
 
   /* ---- title slide ---- */
   .title-slide { justify-content: center; gap: 1.2rem; min-height: 680px; }
-  .title-slide .hero-chart { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 62%; z-index: 0; pointer-events: none; }
+  .title-slide .hero-chart {
+    position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 56%; z-index: 0; pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 42%, transparent 82%);
+    mask-image: linear-gradient(to bottom, black 0%, black 42%, transparent 82%);
+  }
   .title-slide .title-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.2rem; }
   .title-slide .eyebrow { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); }
   .title-slide h1 { font-size: 3.6rem; line-height: 1.06; max-width: 17ch; }
@@ -209,7 +216,9 @@
   .reason p { font-size: 0.86rem; margin-top: 0.5rem; }
 
   /* ---- table ---- */
-  .table-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--card-shadow); padding: 0.3rem 1.5rem; }
+  .table-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--card-shadow); padding: 0.3rem 1.5rem; overflow-x: auto; }
+  .tradeoff-table table { font-size: 0.84rem; }
+  .tradeoff-table td { line-height: 1.5; }
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
   th { text-align: left; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 1rem 1rem 0.7rem 0; border-bottom: 1px solid var(--line); }
   td { padding: 0.9rem 1rem 0.9rem 0; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; line-height: 1.5; }
@@ -226,20 +235,12 @@
   .persona-card .persona-desc { margin-top: 0.7rem; font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
   .tag-row span { font-family: var(--mono); font-size: 0.72rem; border: 1px solid var(--line); border-radius: 20px; padding: 0.25rem 0.7rem; color: var(--ink-soft); }
-
-  /* ---- journey strip (solution) ---- */
-  .flow-strip { display: flex; gap: 0; overflow-x: auto; margin-top: 0.5rem; padding-bottom: 0.5rem; }
-  .flow-step { flex: 1 0 150px; padding: 1rem 1.1rem; border-top: 3px solid var(--accent); background: var(--paper); position: relative; border-radius: 0 0 var(--radius) var(--radius); box-shadow: var(--card-shadow); }
-  .flow-step + .flow-step { margin-left: 0.9rem; }
-  .flow-step .step-no { font-family: var(--mono); font-size: 0.72rem; color: var(--accent-ink); }
-  .flow-step .step-title { font-weight: 700; font-size: 0.88rem; color: var(--ink); margin-top: 0.4rem; }
-  .flow-step .step-body { font-size: 0.8rem; color: var(--ink-soft); margin-top: 0.4rem; line-height: 1.45; }
-
-  /* ---- tradeoff cards ---- */
-  .tradeoff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
-  .tradeoff { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.3rem; background: var(--paper); box-shadow: var(--card-shadow); }
-  .tradeoff .to-title { font-weight: 700; font-size: 0.9rem; color: var(--warn); }
-  .tradeoff p { font-size: 0.85rem; margin-top: 0.4rem; }
+  .voc-list { margin-top: 0.9rem; display: flex; flex-direction: column; gap: 0.7rem; }
+  .voc-item { font-family: var(--serif); font-style: italic; font-size: 1rem; color: var(--ink); border-left: 3px solid var(--accent); padding: 0.15rem 0 0.15rem 0.9rem; line-height: 1.4; }
+  .assumption-note { border: 1px dashed var(--line); border-radius: var(--radius); padding: 1rem 1.3rem; background: var(--paper); }
+  .assumption-note .assumption-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); margin-bottom: 0.4rem; }
+  .assumption-note p { font-size: 0.88rem; margin: 0; line-height: 1.55; }
+  .assumption-note em { color: var(--ink); font-style: normal; font-weight: 700; }
 
   /* ---- metrics slide ---- */
   .metric-hero { border: 1px solid var(--line); border-left: 4px solid var(--good); border-radius: var(--radius); padding: 1.6rem 1.8rem; background: var(--good-soft); box-shadow: var(--card-shadow); }
@@ -275,7 +276,7 @@
 
   @media (max-width: 860px) {
     .slide { padding: 2.2rem 1.6rem; }
-    .stat-row, .two-col, .screens-row, .reason-grid, .persona-wrap, .tradeoff-grid, .metric-cols { grid-template-columns: 1fr; }
+    .stat-row, .two-col, .screens-row, .reason-grid, .persona-wrap, .metric-cols { grid-template-columns: 1fr; }
     .title-slide h1 { font-size: 2.3rem; }
     .rm-row { grid-template-columns: 1fr; }
   }
@@ -286,7 +287,7 @@
     .deck { max-width: 100%; padding: 0; gap: 0; }
     .slide { break-after: page; border-radius: 0; border: none; min-height: 100vh; padding: 2.4cm 2.6cm; box-shadow: none; opacity: 1 !important; transform: none !important; }
     .slide::before { display: none; }
-    .stat-tile, .col-card, .reason, .tradeoff, .persona-card, .metric-hero, .verdict-box, .screen-frame, .table-card, .flow-step { box-shadow: none; }
+    .stat-tile, .col-card, .reason, .persona-card, .metric-hero, .verdict-box, .screen-frame, .table-card { box-shadow: none; }
     @page { size: landscape; margin: 0; }
   }
 </style>
@@ -297,7 +298,7 @@
 
   <!-- 1: TITLE -->
   <section class="slide title-slide">
-    <div class="kicker"><span><i class="spark"></i>Zerodha · PM II Candidate Assignment</span><span class="tag">01 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Zerodha · PM II Candidate Assignment</span><span class="tag">01 / 12</span></div>
     <svg class="hero-chart" viewBox="0 0 900 300" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
       <path class="area" d="M0,196 L70,190 L140,201 L210,185 L280,198 L350,182 L420,193 L490,168 L560,142 L630,101 L700,64 L770,39 L840,21 L900,9 L900,300 L0,300 Z" fill="var(--accent)"/>
       <path class="line" d="M0,196 L70,190 L140,201 L210,185 L280,198 L350,182 L420,193 L490,168 L560,142 L630,101 L700,64 L770,39 L840,21 L900,9" fill="none" stroke="var(--accent)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
@@ -305,10 +306,10 @@
     <div class="title-content">
       <div class="eyebrow">Case study</div>
       <h1>First-Time Investor <span class="accent-word">Activation</span></h1>
-      <p class="sub">Why deposits stall before the first trade — and why the fix is mostly not AI.</p>
+      <p class="sub">Why deposits stall before the first trade.</p>
       <div class="title-meta">
         <div>Prepared by<span>Arundhati Mahapatro</span></div>
-        <div>Format<span>Product case study · 13 slides</span></div>
+        <div>Format<span>Product case study · 12 slides</span></div>
         <div>Core question<span>Is AI the right lens for this problem?</span></div>
       </div>
     </div>
@@ -316,22 +317,23 @@
 
   <!-- 2: PROBLEM IN NUMBERS -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Problem definition</span><span class="tag">02 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Problem definition</span><span class="tag">02 / 12</span></div>
     <h2>Money moves in. Momentum doesn't.</h2>
     <p class="dek">A first-time investor completes KYC, deposits money — and a large share never place a first trade. This is not a Zerodha-specific quirk; it's a structural pattern across Indian retail investing.</p>
     <div class="body">
       <div class="stat-row">
-        <div class="stat-tile"><div class="num">30&ndash;40%</div><div class="label">of India's demat accounts show any transaction in a 12-month window — the rest sit dormant.</div></div>
-        <div class="stat-tile"><div class="num">41.7%</div><div class="label">of first-time investors who do eventually invest take about a month to place their first trade.</div></div>
-        <div class="stat-tile"><div class="num">9.5%</div><div class="label">of Indian households actually invest in market products, vs. 63% who are already aware of them.</div></div>
+        <div class="stat-tile"><div class="num">30&ndash;40%</div><div class="label">of India's demat accounts show any transaction in a 12-month window — the rest sit dormant.<sup>1</sup></div></div>
+        <div class="stat-tile"><div class="num">41.7%</div><div class="label">of first-time investors who do eventually invest take about a month to place their first trade.<sup>2</sup></div></div>
+        <div class="stat-tile"><div class="num">9.5%</div><div class="label">of Indian households actually invest in market products, vs. 63% who are already aware of them.<sup>3</sup></div></div>
       </div>
       <p style="font-size:0.9rem; margin-top:0.5rem;">The gap isn't awareness or access — both are effectively solved. It's what happens in the seconds after money lands with nowhere obvious to go.</p>
+      <p class="sources">Sources: <sup>1</sup>Choice India, dormant demat account analysis &middot; <sup>2</sup>Zerodha Kite onboarding teardown (S. Baranwal) &middot; <sup>3</sup>Acumen Group, Indian stock market investor participation study</p>
     </div>
   </section>
 
   <!-- 3: REAL JOURNEY -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Field research</span><span class="tag">03 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Field research</span><span class="tag">03 / 12</span></div>
     <h2>What the app actually shows on day one</h2>
     <p class="dek">Walked a live Kite account rather than assume the flow. Three screens tell most of the story.</p>
     <div class="body">
@@ -357,23 +359,24 @@
 
   <!-- 4: ROOT CAUSES -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Diagnosis</span><span class="tag">04 / 13</span></div>
-    <h2>Five reasons the freeze happens</h2>
-    <p class="dek">Ranked by leverage — the top two explain most of the drop-off.</p>
+    <div class="kicker"><span><i class="spark"></i>Diagnosis</span><span class="tag">04 / 12</span></div>
+    <h2>Six reasons the freeze happens</h2>
+    <p class="dek">Ranked by where they occur — the freeze starts earlier than "after deposit."</p>
     <div class="body">
       <div class="cause-list">
-        <div class="cause"><div class="rank">01</div><div><div class="cause-title">No default next step</div><div class="cause-body">Zerodha deliberately never tells users what to buy — core to the trust brand. But a first-timer needs some scaffolding, and today gets none.</div></div></div>
-        <div class="cause"><div class="rank">02</div><div><div class="cause-title">Decision paralysis + fear of the wrong move</div><div class="cause-body">Real complaints converge on one line: "I put money in, now what do I even buy?" Most arrived on social proof, not a thesis.</div></div></div>
-        <div class="cause"><div class="rank">03</div><div><div class="cause-title">Education lives outside the decision</div><div class="cause-body">Varsity is excellent, but it's a separate app — learning happens as homework, not as help at the moment of choice.</div></div></div>
-        <div class="cause"><div class="rank">04</div><div><div class="cause-title">Product surface mismatch</div><div class="cause-body">A beginner's natural first move (small SIP) is buried inside a trading terminal built for an entirely different persona.</div></div></div>
-        <div class="cause"><div class="rank">05</div><div><div class="cause-title">No re-engagement loop</div><div class="cause-body">Once a user bounces, nothing brings them back — existing nudges are compliance-driven, not activation-driven.</div></div></div>
+        <div class="cause"><div class="rank">01</div><div><div class="cause-title">The freeze starts during onboarding itself</div><div class="cause-body">Walked the signup flow: right after PAN entry, step 2 of 5 asks "what products would you like to start with?" — Equity &amp; Mutual Funds / F&amp;O / Commodity toggles, plus a dense terms block — before the user has seen the app or been told what any of these mean.</div></div></div>
+        <div class="cause"><div class="rank">02</div><div><div class="cause-title">No default next step</div><div class="cause-body">Zerodha deliberately never tells users what to buy — core to the trust brand. But a first-timer needs some scaffolding, and today gets none.</div></div></div>
+        <div class="cause"><div class="rank">03</div><div><div class="cause-title">Decision paralysis + fear of the wrong move</div><div class="cause-body">Real complaints converge on one line: "I put money in, now what do I even buy?" Most arrived on social proof, not a thesis.</div></div></div>
+        <div class="cause"><div class="rank">04</div><div><div class="cause-title">Education lives outside the decision</div><div class="cause-body">Varsity is excellent, but it's a separate app — learning happens as homework, not as help at the moment of choice.</div></div></div>
+        <div class="cause"><div class="rank">05</div><div><div class="cause-title">Product surface mismatch</div><div class="cause-body">A beginner's natural first move (small SIP) is buried inside a trading terminal built for an entirely different persona.</div></div></div>
+        <div class="cause"><div class="rank">06</div><div><div class="cause-title">No re-engagement loop</div><div class="cause-body">Once a user bounces, nothing brings them back — existing nudges are compliance-driven, not activation-driven.</div></div></div>
       </div>
     </div>
   </section>
 
   <!-- 5: WHY IT MATTERS -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Stakes</span><span class="tag">05 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Stakes</span><span class="tag">05 / 12</span></div>
     <h2>Why this is worth solving deliberately</h2>
     <div class="body">
       <div class="two-col">
@@ -399,11 +402,11 @@
 
   <!-- 6: AI VERDICT -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>AI evaluation</span><span class="tag">06 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>AI evaluation</span><span class="tag">06 / 12</span></div>
     <h2>Is AI the right lens? The explicit call.</h2>
     <div class="body">
       <div class="verdict-box">
-        <p class="verdict-text">AI is not the primary lever. This is roughly 70% UX, content, and product structure — and 30% narrowly-scoped AI.</p>
+        <p class="verdict-text">AI can be a catalyst here — it's very difficult for it to be the whole solution. This is roughly 70% UX, content, and product structure, and 30% narrowly-scoped AI.</p>
         <div class="split-bar"><div class="ux-part">UX / Content / Structure — 70%</div><div class="ai-part">Bounded AI — 30%</div></div>
       </div>
       <div class="reason-grid">
@@ -411,12 +414,13 @@
         <div class="reason"><div class="reason-title">The bottleneck is structural</div><p>Users aren't stuck for lack of someone to ask — they're stuck for lack of a visible, low-risk default action. A chatbot doesn't fix a missing on-ramp.</p></div>
         <div class="reason"><div class="reason-title">Trust needs proof, not explanation</div><p>Fear of "getting it wrong" is solved by shrinking the stakes of the first action, not by a Q&amp;A interface that assumes the user knows what to ask.</p></div>
       </div>
+      <p style="font-size:0.85rem; margin-top:0.2rem;">Where AI does earn a role, it accelerates a UX fix that already works — it can't manufacture the missing on-ramp by itself. That's the "catalyst, not solution" distinction.</p>
     </div>
   </section>
 
   <!-- 7: WHERE AI HELPS -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>AI evaluation</span><span class="tag">07 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>AI evaluation</span><span class="tag">07 / 12</span></div>
     <h2>Where AI earns its place — tightly bounded</h2>
     <p class="dek">Only after the deterministic fix ships. Each use has a hard-coded line it must never cross.</p>
     <div class="body">
@@ -435,7 +439,7 @@
 
   <!-- 8: TARGET USER -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Target user</span><span class="tag">08 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Target user</span><span class="tag">08 / 12</span></div>
     <h2>Who this is designed for</h2>
     <div class="body">
       <div class="persona-wrap">
@@ -445,42 +449,27 @@
           <div class="tag-row"><span>Time-poor</span><span>Fears "getting it wrong"</span><span>Trusts peers, not tips</span><span>MF-oriented at heart</span></div>
         </div>
         <div class="col-card">
-          <h3>Pain points</h3>
-          <ul>
-            <li>Doesn't know what a "good" first stock or fund looks like.</li>
-            <li>Afraid one wrong pick causes a real loss — reinforced by the F&amp;O risk disclosure.</li>
-            <li>Doesn't know the vocabulary (SIP, GTT, basket) to navigate to the safest start.</li>
-            <li>No low-stakes way to "practice" before committing conviction.</li>
-            <li>Nobody reaches out once they've stalled — silence reads as "nothing more to do here."</li>
-          </ul>
+          <h3>Voice of the customer</h3>
+          <div class="voc-list">
+            <div class="voc-item">"Where should I even invest?"</div>
+            <div class="voc-item">"How should I invest — lump sum, SIP, what?"</div>
+            <div class="voc-item">"How much is safe to put in as a first try?"</div>
+            <div class="voc-item">"Should I even trust this app with my money?"</div>
+          </div>
         </div>
+      </div>
+      <div class="assumption-note">
+        <div class="assumption-label">Key assumption</div>
+        <p>"First-time investor" collapses two different people: first time <em>on Zerodha</em>, and first time <em>investing at all</em>. This design targets the latter — the harder case. Signal: Zerodha's own onboarding already asks trading experience ("New" / "1&ndash;5 years" / etc.) at signup but doesn't act on the answer — a true first-timer gets the identical unguided drop as a veteran switching brokers.</p>
       </div>
     </div>
   </section>
 
   <!-- 9: SOLUTION -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Solution</span><span class="tag">09 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Solution, in the product</span><span class="tag">09 / 12</span></div>
     <h2>"First ₹500" — a guided on-ramp</h2>
-    <p class="dek">Fully optional and dismissible — the self-directed power-user flow is untouched.</p>
-    <div class="body">
-      <div class="flow-strip">
-        <div class="flow-step"><div class="step-no">01</div><div class="step-title">Start Here card</div><div class="step-body">Appears after first deposit clears. Dismissible, persists until first investment.</div></div>
-        <div class="flow-step"><div class="step-no">02</div><div class="step-title">2-min intent check</div><div class="step-body">Routing, never advice. Two questions → one of three static paths.</div></div>
-        <div class="flow-step"><div class="step-no">03</div><div class="step-title">Shrink the stakes</div><div class="step-body">Default first action: ₹500 index-fund SIP. Small, reversible.</div></div>
-        <div class="flow-step"><div class="step-no">04</div><div class="step-title">In-context education</div><div class="step-body">Varsity content surfaced inside the decision screen, not a separate app.</div></div>
-        <div class="flow-step"><div class="step-no">05</div><div class="step-title">Re-engagement nudges</div><div class="step-body">Day 1/3/7 after a stalled deposit — education, social proof, one-tap resume.</div></div>
-        <div class="flow-step"><div class="step-no">06</div><div class="step-title">Bounded AI helper</div><div class="step-body">On-demand concept explainer. Refuses "should I buy" questions by design.</div></div>
-        <div class="flow-step"><div class="step-no">07</div><div class="step-title">Human safety valve</div><div class="step-body">High-deposit, still-inactive users get a proactive support callback.</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10: SOLUTION IN PRODUCT -->
-  <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Solution, in the product</span><span class="tag">10 / 13</span></div>
-    <h2>Not a concept — a working prototype</h2>
-    <p class="dek">Five real screens from the clickable prototype, walking the same path a first-timer would tap through.</p>
+    <p class="dek">Not just a concept — five real screens from the clickable prototype, walking the same path a first-timer would tap through. Fully optional; the self-directed flow is untouched.</p>
     <div class="body">
       <div class="screens-row screens-row-5">
         <div class="screen-card">
@@ -509,46 +498,57 @@
           <div class="cap-text">Confirms, then teases one small lesson — momentum without pressure.</div>
         </div>
       </div>
-      <p style="font-size:0.85rem; margin-top:0.3rem;">Also in the flow (not pictured): each lesson opens as short, swipeable cards instead of a link out to Varsity, and high-deposit users who stay inactive past 14 days get a proactive human callback.</p>
+      <p style="font-size:0.85rem; margin-top:0.3rem;">Also in the flow (not pictured): a "Talk to someone" option at every step for anyone who'd rather not self-serve; short swipeable lesson cards instead of a link out to Varsity; Day 1/3/7 re-engagement nudges; a bounded AI helper that explains but never recommends; and a proactive human callback for high-deposit users who stay inactive past 14 days.</p>
     </div>
   </section>
 
-  <!-- 11: TRADEOFFS -->
+  <!-- 10: TRADEOFFS -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Trade-offs &amp; risks</span><span class="tag">11 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Trade-offs &amp; risks</span><span class="tag">10 / 12</span></div>
     <h2>What we're deliberately trading against</h2>
+    <p class="dek">Every major dimension the assignment flags — walked through explicitly, not assumed away.</p>
     <div class="body">
-      <div class="tradeoff-grid">
-        <div class="tradeoff"><div class="to-title">Brand risk</div><p>Any default nudges against "we never push products." Mitigated by framing every default as educational and fully skippable.</p></div>
-        <div class="tradeoff"><div class="to-title">Compliance surface</div><p>AI-generated text near financial decisions needs hard scoping, templated content, and a documented refusal pattern.</p></div>
-        <div class="tradeoff"><div class="to-title">Friction vs. speed</div><p>The 2-minute intent check adds friction at the moment we want zero — must be A/B tested, not assumed to help.</p></div>
-        <div class="tradeoff"><div class="to-title">Build sequencing</div><p>The deterministic UX fix ships fast; ML-personalized nudges are a slower phase 2 — the fast win can't wait on the slow one.</p></div>
+      <div class="table-card tradeoff-table">
+        <table>
+          <thead><tr><th style="width:17%">Dimension</th><th style="width:41%">Trade-off / risk</th><th>How we handle it</th></tr></thead>
+          <tbody>
+            <tr><td><b>Complexity</b></td><td>Multi-path routing (self-directed vs. guided vs. lessons) adds real branching logic to build and maintain.</td><td>Ship the single deterministic path first (month 1&ndash;3); other branches are additive, not blocking.</td></tr>
+            <tr><td><b>Cost</b></td><td>Propensity modeling and personalized nudges need real data-infrastructure investment.</td><td>AI spend is sequenced to month 5&ndash;6, after the free UX fix has already proven the lift.</td></tr>
+            <tr><td><b>User trust</b></td><td>Any default nudge risks diluting "we never push products" — the core trust brand.</td><td>Every default is framed as informational, never a recommendation, and fully skippable.</td></tr>
+            <tr><td><b>Product suitability</b></td><td>A single ₹500 index-SIP default may not fit every income or risk profile.</td><td>Default is deliberately generic and low-stakes; self-directed paths stay fully open.</td></tr>
+            <tr><td><b>Safety</b></td><td>AI-generated text near financial decisions is a mis-selling risk if it drifts into advice.</td><td>Hard-coded refusal pattern, templated/compliance-reviewed copy, no free generation near security names.</td></tr>
+            <tr><td><b>Scalability</b></td><td>Rules-based nudges don't get smarter as the dormant cohort grows into millions.</td><td>Propensity model is built once volume justifies it — not before, per the roadmap.</td></tr>
+            <tr><td><b>Speed to ship</b></td><td>The full roadmap spans six months; leadership may want proof sooner.</td><td>The deterministic MVP ships in month 2 — the activation lift is measurable long before AI enters.</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
   <!-- 11: METRICS -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Success measurement</span><span class="tag">12 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Success measurement</span><span class="tag">11 / 12</span></div>
     <h2>How we'll know it worked</h2>
+    <p class="dek"><b>Goal:</b> increase activation % — the share of first-time investors who actually invest — not just accounts opened.</p>
     <div class="body">
       <div class="metric-hero">
-        <div class="m-label">North-star</div>
-        <div class="m-value">% of new demat accounts completing a first investment within 30 days of first deposit — "Activation Rate."</div>
+        <div class="m-label">Mother metric</div>
+        <div class="m-value">% of first-time users who invest at least once within 30 days of first deposit — "Activation Rate."</div>
       </div>
       <div class="metric-cols">
         <div class="col-card">
-          <h3>Supporting metrics</h3>
+          <h3>Leading indicators</h3>
           <ul>
+            <li>TAT: median time from deposit to first investment</li>
+            <li>Share of first-time investors vs. all active investors on the platform</li>
             <li>Guided-path engagement vs. skip-rate, and conversion for each</li>
-            <li>Median time-to-first-investment</li>
-            <li>% of first investments that are small/starter-sized</li>
-            <li>90-day second-transaction rate</li>
+            <li>90-day second-transaction rate — activation that sticks, not one-and-done</li>
           </ul>
         </div>
         <div class="col-card">
           <h3>Guardrail metrics</h3>
           <ul>
+            <li>Avg. investment amount of first-time investors — should stay small/starter-sized, not creep up</li>
             <li>Support tickets citing "felt pushed" / mis-selling concern</li>
             <li>Any SEBI / advisory-boundary escalation — must stay zero</li>
             <li>30-day cancellation rate on guided SIPs</li>
@@ -561,7 +561,7 @@
 
   <!-- 12: ROADMAP -->
   <section class="slide">
-    <div class="kicker"><span><i class="spark"></i>Execution</span><span class="tag">13 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Execution</span><span class="tag">12 / 12</span></div>
     <h2>Six-month roadmap</h2>
     <p class="dek">AI enters deliberately late — once the deterministic fix is proven, not as a substitute for it.</p>
     <div class="body">
@@ -649,7 +649,7 @@
 
 <div class="nav-dock">
   <button id="prevBtn" aria-label="Previous slide">&larr;</button>
-  <span class="count" id="slideCount">1 / 13</span>
+  <span class="count" id="slideCount">1 / 12</span>
   <button id="nextBtn" aria-label="Next slide">&rarr;</button>
   <button class="print-btn" id="printBtn" aria-label="Export as PDF">Export PDF</button>
 </div>
@@ -681,6 +681,10 @@
     window.addEventListener('beforeprint', () => {
       slides.forEach((s) => { s.style.opacity = '1'; s.style.transform = 'none'; });
     });
+    // Belt-and-braces: never leave anything invisible for long, even if the observer misbehaves.
+    setTimeout(() => {
+      slides.forEach((s) => { s.style.opacity = '1'; s.style.transform = 'none'; });
+    }, 1500);
   }
 
   function currentIndex() {

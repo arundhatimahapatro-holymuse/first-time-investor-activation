@@ -260,7 +260,7 @@ function watchlistScreen(withCard) {
     ${withCard ? `
     <div class="start-card">
       <div class="sc-eyebrow">Start here</div>
-      <div class="sc-title">Your ₹5,000 just landed. Let's put it to work.</div>
+      <div class="sc-title">Your ₹500 just landed. Let's put it to work.</div>
       <div class="sc-actions"><button class="primary" onclick="go('q1')">Get started</button><button class="skip" onclick="go('wl-skip')">Skip</button></div>
     </div>` : `<div style="margin:0 1rem 0.6rem; padding:0.6rem 0.8rem; border-radius:8px; background:#E4F3EA; color:#1E7B4D; font-size:0.78rem; font-weight:600;">SIP active — ₹500 monthly into Nifty 50 Index</div>`}
     <div class="wl-search">Search &amp; add</div>
@@ -307,6 +307,7 @@ function q2Screen() {
       <h3>Pick stocks yourself, or start simpler?</h3>
       <div class="opt-card" onclick="branch='selfdirected'; go('selfdirected')"><div class="opt-title">I'll pick myself</div><div class="opt-sub">Show me what's popular, I've got this</div></div>
       <div class="opt-card" onclick="branch='guided'; go('rec')"><div class="opt-title">Start simpler</div><div class="opt-sub">Give me one safe way to begin</div></div>
+      <div class="opt-card" onclick="branch='human'; go('human')"><div class="opt-title">I'd rather talk to someone</div><div class="opt-sub">Request a callback — no sales pitch</div></div>
     </div>
   `;
 }
@@ -327,7 +328,37 @@ function recScreen() {
       <div class="alt-links">
         <a onclick="go('selfdirected')">See what other investors hold instead</a>
         <a onclick="go('learn')">Learn the basics first (3 short lessons)</a>
+        <a onclick="go('human')">I'd rather talk to a person</a>
       </div>
+    </div>
+  `;
+}
+
+function humanScreen() {
+  return `
+    ${statusbar()}
+    <div class="rec-screen">
+      <div class="back" onclick="go('q2')">&larr; Back</div>
+      <div class="tag">Human assistance</div>
+      <h3>Talk to someone before you decide</h3>
+      <div class="rec-card">
+        <div class="rc-name">Request a callback</div>
+        <div class="rc-desc">A support specialist calls you within 24 hours — no sales pitch, just help understanding your options. Free, and you're never asked to invest on the call.</div>
+        <button class="primary-full" onclick="go('humanConfirm')">Request callback</button>
+      </div>
+      <div class="alt-links"><a onclick="go('rec')">Or see the suggested starting point</a></div>
+    </div>
+  `;
+}
+
+function humanConfirmScreen() {
+  return `
+    ${statusbar()}
+    <div class="confirm-screen">
+      <div class="confirm-badge">✓</div>
+      <h3>We'll call you soon</h3>
+      <p>A support specialist will reach out within 24 hours, on the number linked to your account. No pressure, no pitch — just help getting started.</p>
+      <button class="primary-full" onclick="go('wl-skip')">Done</button>
     </div>
   `;
 }
@@ -451,6 +482,8 @@ const proposedRegistry = {
   q2: { render: q2Screen, info: { eyebrow: 'Step 2', title: 'Respecting the self-directed user', body: 'Choosing "I\'ll pick myself" routes to a factual, social-proof screen instead — never blocking the experienced user with hand-holding they didn\'t ask for.', tag: ['safe','Two real paths'] } },
   rec: { render: recScreen, info: { eyebrow: 'Step 3', title: 'One tiny, reversible first action', body: 'The suggested default is a ₹500 index-fund SIP — small enough that being "wrong" costs almost nothing, and framed as what similar first-timers do, not personal advice.', tag: ['safe','₹500, reversible'] } },
   selfdirected: { render: selfDirectedScreen, info: { eyebrow: 'Alternate path', title: 'Informational, explicitly labelled', body: 'For users who want to pick themselves, this shows what other investors hold — a factual, social-proof framing that stops short of "you should buy this."', tag: ['note','Not a recommendation'] } },
+  human: { render: humanScreen, info: { eyebrow: 'Alternate path', title: 'Not everything should be self-serve', body: 'Some first-timers don\'t want a flow at all — they want to talk to a person before trusting an app with their money. A callback request costs Zerodha very little at low volume and is the highest-trust option on the screen.', tag: ['safe','No sales pitch'] } },
+  humanConfirm: { render: humanConfirmScreen, info: { eyebrow: 'Alternate path', title: 'Same close, different door', body: 'Whether someone self-serves to a SIP or asks for a callback, the loop closes the same way — a clear confirmation, then back to a watchlist that finally has momentum.', tag: ['safe','Activated'] } },
   learn: { render: learnScreen, info: { eyebrow: 'Alternate path', title: 'Education inside the flow', body: 'Varsity content surfaced at the exact decision point, instead of a separate app the user has to remember exists. Each lesson opens as a short, swipeable card stack — not a wall of text.', tag: ['safe','In-context'] } },
   lesson: { render: lessonScreen, info: () => ({ eyebrow: 'In-context lesson', title: lessons[lessonState.key].title, body: 'Short, card-based — worked through in under a minute without ever leaving the flow. This is what "education in the flow" actually looks like, not a link out to a separate app.', tag: ['safe', `Card ${lessonState.card + 1} of ${lessons[lessonState.key].cards.length}`] }) },
   setup: { render: setupScreen, info: { eyebrow: 'Step 4', title: 'A form, not a decision', body: 'By this point the only remaining choice is "confirm" — all the hard thinking happened earlier, in a lower-stakes place.', tag: [] } },
