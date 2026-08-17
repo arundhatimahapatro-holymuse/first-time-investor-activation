@@ -24,7 +24,9 @@
     --mono: ui-monospace, "SF Mono", "Roboto Mono", Menlo, Consolas, monospace;
     --serif: ui-serif, Georgia, "Iowan Old Style", "Source Serif Pro", "Times New Roman", serif;
     --sans: -apple-system, "Segoe UI", "SF Pro Text", Roboto, Helvetica, Arial, sans-serif;
-    --radius: 3px;
+    --radius: 6px;
+    --card-shadow: 0 1px 2px rgba(20,22,28,0.05), 0 14px 30px -18px rgba(20,22,28,0.28);
+    --slide-shadow: 0 1px 1px rgba(20,22,28,0.03), 0 24px 48px -28px rgba(20,22,28,0.32);
   }
   :root[data-theme="dark"] {
     --paper: #14161C;
@@ -42,6 +44,8 @@
     --warn-soft: #35270D;
     --gantt-noai: #A9782E;
     --gantt-ai: #33A870;
+    --card-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 14px 30px -16px rgba(0,0,0,0.6);
+    --slide-shadow: 0 1px 0 rgba(0,0,0,0.25), 0 28px 56px -26px rgba(0,0,0,0.7);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -60,6 +64,8 @@
       --warn-soft: #35270D;
       --gantt-noai: #A9782E;
       --gantt-ai: #33A870;
+      --card-shadow: 0 1px 0 rgba(0,0,0,0.2), 0 14px 30px -16px rgba(0,0,0,0.6);
+      --slide-shadow: 0 1px 0 rgba(0,0,0,0.25), 0 28px 56px -26px rgba(0,0,0,0.7);
     }
   }
 
@@ -70,7 +76,11 @@
     color: var(--ink);
     font-family: var(--sans);
   }
-  body { padding-bottom: 4rem; }
+  body {
+    padding-bottom: 4rem;
+    background-image: radial-gradient(circle, var(--line) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
 
   .deck {
     max-width: 1180px;
@@ -78,18 +88,27 @@
     padding: 2.5rem 1.5rem 0;
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
+    gap: 2.1rem;
   }
 
   .slide {
     background: var(--paper-raised);
     border: 1px solid var(--line);
-    border-radius: 6px;
+    border-radius: 12px;
     padding: 3.2rem 3.6rem;
     min-height: 640px;
     display: flex;
     flex-direction: column;
     position: relative;
+    box-shadow: var(--slide-shadow);
+    overflow: hidden;
+  }
+  .slide::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--good) 130%);
   }
 
   .kicker {
@@ -102,29 +121,53 @@
     text-transform: uppercase;
     color: var(--muted);
     margin-bottom: 1.6rem;
+    position: relative;
+    z-index: 1;
   }
-  .kicker .tag { color: var(--accent-ink); }
+  .kicker .tag { color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+  .kicker .spark {
+    display: inline-block;
+    width: 24px; height: 13px;
+    margin-right: 0.6rem;
+    vertical-align: -2px;
+    background-color: var(--accent-ink);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 24'%3E%3Cpolyline points='2,18 9,15.5 16,17.5 23,12 30,14 37,6 42,3' fill='none' stroke='black' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 24'%3E%3Cpolyline points='2,18 9,15.5 16,17.5 23,12 30,14 37,6 42,3' fill='none' stroke='black' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain; mask-size: contain;
+    -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  }
 
   h1, h2, h3 { font-family: var(--serif); font-weight: 600; text-wrap: balance; margin: 0; }
-  .slide h2 { font-size: 2.05rem; line-height: 1.18; letter-spacing: -0.01em; color: var(--ink); }
-  .slide .dek { font-family: var(--sans); font-size: 1.05rem; color: var(--ink-soft); margin-top: 0.7rem; max-width: 62ch; line-height: 1.55; }
-  .body { margin-top: 2rem; flex: 1; display: flex; flex-direction: column; gap: 1.5rem; }
+  .slide h2 { font-size: 2.15rem; line-height: 1.16; letter-spacing: -0.015em; color: var(--ink); position: relative; z-index: 1; }
+  .slide .dek { font-family: var(--sans); font-size: 1.05rem; color: var(--ink-soft); margin-top: 0.7rem; max-width: 62ch; line-height: 1.55; position: relative; z-index: 1; }
+  .body { margin-top: 2rem; flex: 1; display: flex; flex-direction: column; gap: 1.5rem; position: relative; z-index: 1; }
 
   p { line-height: 1.6; color: var(--ink-soft); }
   a { color: var(--accent-ink); }
 
   /* ---- title slide ---- */
   .title-slide { justify-content: center; gap: 1.2rem; min-height: 680px; }
+  .title-slide .hero-chart { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 62%; z-index: 0; pointer-events: none; }
+  .title-slide .title-content { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1.2rem; }
   .title-slide .eyebrow { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-ink); }
-  .title-slide h1 { font-size: 3.4rem; line-height: 1.08; max-width: 16ch; }
+  .title-slide h1 { font-size: 3.6rem; line-height: 1.06; max-width: 17ch; }
+  .title-slide h1 .accent-word { color: var(--accent-ink); }
+  .hero-chart .area { opacity: 0.045; }
+  .hero-chart .line { opacity: 0.16; }
+  :root[data-theme="dark"] .hero-chart .area { opacity: 0.13; }
+  :root[data-theme="dark"] .hero-chart .line { opacity: 0.22; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hero-chart .area { opacity: 0.13; }
+    :root:not([data-theme="light"]) .hero-chart .line { opacity: 0.22; }
+  }
   .title-slide .sub { font-size: 1.15rem; color: var(--ink-soft); max-width: 52ch; margin-top: 0.3rem; }
   .title-meta { margin-top: 2.2rem; display: flex; gap: 2.4rem; font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
   .title-meta div span { display: block; color: var(--ink); font-family: var(--sans); font-size: 0.92rem; margin-top: 0.2rem; }
 
   /* ---- stat tiles ---- */
   .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .stat-tile { border: 1px solid var(--line); border-top: 2px solid var(--accent); border-radius: var(--radius); padding: 1.3rem 1.4rem; background: var(--paper); }
-  .stat-tile .num { font-family: var(--serif); font-size: 2.5rem; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1; }
+  .stat-tile { border: 1px solid var(--line); border-top: 2.5px solid var(--accent); border-radius: var(--radius); padding: 1.3rem 1.4rem; background: var(--paper); box-shadow: var(--card-shadow); transition: transform .25s ease; }
+  .stat-tile .num { font-family: var(--serif); font-size: 2.6rem; color: var(--accent-ink); font-variant-numeric: tabular-nums; line-height: 1; }
   .stat-tile .label { margin-top: 0.6rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.4; }
 
   /* ---- journey screens ---- */
@@ -132,7 +175,7 @@
   .screens-row-5 { grid-template-columns: repeat(5, 1fr); gap: 1rem; }
   .screens-row-5 .cap-text { font-size: 0.78rem; }
   .screen-card { display: flex; flex-direction: column; gap: 0.7rem; }
-  .screen-frame { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--paper); }
+  .screen-frame { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--paper); box-shadow: var(--card-shadow); }
   .screen-frame img { display: block; width: 100%; height: auto; }
   .screen-card .cap-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-ink); }
   .screen-card .cap-text { font-size: 0.86rem; color: var(--ink-soft); line-height: 1.45; }
@@ -147,27 +190,28 @@
 
   /* ---- two column ---- */
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .col-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.6rem; background: var(--paper); }
+  .col-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem 1.6rem; background: var(--paper); box-shadow: var(--card-shadow); }
   .col-card h3 { font-family: var(--sans); font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-ink); font-weight: 700; }
   .col-card ul { margin: 0.9rem 0 0; padding-left: 1.1rem; color: var(--ink-soft); font-size: 0.92rem; line-height: 1.6; }
   .col-card li { margin-bottom: 0.5rem; }
 
   /* ---- verdict slide ---- */
-  .verdict-box { border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 1.8rem 2rem; background: var(--accent-soft); }
+  .verdict-box { border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 1.8rem 2rem; background: var(--accent-soft); box-shadow: var(--card-shadow); }
   .verdict-box .verdict-text { font-family: var(--serif); font-size: 1.5rem; line-height: 1.35; color: var(--ink); margin: 0; }
-  .split-bar { display: flex; height: 2.1rem; border-radius: 3px; overflow: hidden; margin-top: 1.4rem; font-family: var(--mono); font-size: 0.78rem; }
-  .split-bar .ux-part { background: var(--accent); color: #fff; display: flex; align-items: center; padding-left: 0.9rem; width: 70%; }
-  .split-bar .ai-part { background: var(--ink-soft); color: var(--paper-raised); display: flex; align-items: center; padding-left: 0.9rem; width: 30%; }
+  .split-bar { display: flex; height: 2.3rem; border-radius: 20px; overflow: hidden; margin-top: 1.4rem; font-family: var(--mono); font-size: 0.78rem; box-shadow: inset 0 1px 2px rgba(0,0,0,0.08); }
+  .split-bar .ux-part { background: linear-gradient(135deg, var(--accent-ink), var(--accent)); color: #fff; display: flex; align-items: center; padding-left: 1rem; width: 70%; }
+  .split-bar .ai-part { background: var(--ink-soft); color: var(--paper-raised); display: flex; align-items: center; padding-left: 1rem; width: 30%; }
   :root[data-theme="dark"] .split-bar .ai-part, .split-bar .ai-part { color: var(--paper); }
 
   .reason-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; margin-top: 0.5rem; }
-  .reason { padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+  .reason { padding: 1.2rem 1.3rem; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--card-shadow); }
   .reason .reason-title { font-weight: 700; font-size: 0.92rem; color: var(--ink); }
   .reason p { font-size: 0.86rem; margin-top: 0.5rem; }
 
   /* ---- table ---- */
+  .table-card { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); box-shadow: var(--card-shadow); padding: 0.3rem 1.5rem; }
   table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  th { text-align: left; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 0 1rem 0.7rem 0; border-bottom: 1px solid var(--line); }
+  th { text-align: left; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 1rem 1rem 0.7rem 0; border-bottom: 1px solid var(--line); }
   td { padding: 0.9rem 1rem 0.9rem 0; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; line-height: 1.5; }
   td:first-child, th:first-child { padding-left: 0; }
   tr:last-child td { border-bottom: none; }
@@ -177,7 +221,7 @@
 
   /* ---- persona ---- */
   .persona-wrap { display: grid; grid-template-columns: 1.1fr 1fr; gap: 2rem; }
-  .persona-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.8rem; background: var(--paper); }
+  .persona-card { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.7rem 1.8rem; background: var(--paper); box-shadow: var(--card-shadow); }
   .persona-card .persona-name { font-family: var(--serif); font-size: 1.35rem; color: var(--ink); }
   .persona-card .persona-desc { margin-top: 0.7rem; font-size: 0.92rem; color: var(--ink-soft); line-height: 1.6; }
   .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
@@ -185,7 +229,7 @@
 
   /* ---- journey strip (solution) ---- */
   .flow-strip { display: flex; gap: 0; overflow-x: auto; margin-top: 0.5rem; padding-bottom: 0.5rem; }
-  .flow-step { flex: 1 0 150px; padding: 1rem 1.1rem; border-top: 3px solid var(--accent); background: var(--paper); position: relative; }
+  .flow-step { flex: 1 0 150px; padding: 1rem 1.1rem; border-top: 3px solid var(--accent); background: var(--paper); position: relative; border-radius: 0 0 var(--radius) var(--radius); box-shadow: var(--card-shadow); }
   .flow-step + .flow-step { margin-left: 0.9rem; }
   .flow-step .step-no { font-family: var(--mono); font-size: 0.72rem; color: var(--accent-ink); }
   .flow-step .step-title { font-weight: 700; font-size: 0.88rem; color: var(--ink); margin-top: 0.4rem; }
@@ -193,12 +237,12 @@
 
   /* ---- tradeoff cards ---- */
   .tradeoff-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem; }
-  .tradeoff { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.3rem; background: var(--paper); }
+  .tradeoff { border: 1px solid var(--line); border-radius: var(--radius); padding: 1.1rem 1.3rem; background: var(--paper); box-shadow: var(--card-shadow); }
   .tradeoff .to-title { font-weight: 700; font-size: 0.9rem; color: var(--warn); }
   .tradeoff p { font-size: 0.85rem; margin-top: 0.4rem; }
 
   /* ---- metrics slide ---- */
-  .metric-hero { border: 1px solid var(--line); border-left: 4px solid var(--good); border-radius: var(--radius); padding: 1.6rem 1.8rem; background: var(--good-soft); }
+  .metric-hero { border: 1px solid var(--line); border-left: 4px solid var(--good); border-radius: var(--radius); padding: 1.6rem 1.8rem; background: var(--good-soft); box-shadow: var(--card-shadow); }
   .metric-hero .m-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--good); }
   .metric-hero .m-value { font-family: var(--serif); font-size: 1.55rem; color: var(--ink); margin-top: 0.5rem; line-height: 1.3; }
   .metric-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem; }
@@ -240,7 +284,9 @@
     body { padding-bottom: 0; background: #fff; }
     .nav-dock { display: none; }
     .deck { max-width: 100%; padding: 0; gap: 0; }
-    .slide { break-after: page; border-radius: 0; border: none; min-height: 100vh; padding: 2.4cm 2.6cm; }
+    .slide { break-after: page; border-radius: 0; border: none; min-height: 100vh; padding: 2.4cm 2.6cm; box-shadow: none; opacity: 1 !important; transform: none !important; }
+    .slide::before { display: none; }
+    .stat-tile, .col-card, .reason, .tradeoff, .persona-card, .metric-hero, .verdict-box, .screen-frame, .table-card, .flow-step { box-shadow: none; }
     @page { size: landscape; margin: 0; }
   }
 </style>
@@ -251,20 +297,26 @@
 
   <!-- 1: TITLE -->
   <section class="slide title-slide">
-    <div class="kicker"><span>Zerodha · PM II Candidate Assignment</span><span class="tag">01 / 13</span></div>
-    <div class="eyebrow">Case study</div>
-    <h1>First-Time Investor Activation</h1>
-    <p class="sub">Why deposits stall before the first trade — and why the fix is mostly not AI.</p>
-    <div class="title-meta">
-      <div>Prepared by<span>Arundhati Mahapatro</span></div>
-      <div>Format<span>Product case study · 13 slides</span></div>
-      <div>Core question<span>Is AI the right lens for this problem?</span></div>
+    <div class="kicker"><span><i class="spark"></i>Zerodha · PM II Candidate Assignment</span><span class="tag">01 / 13</span></div>
+    <svg class="hero-chart" viewBox="0 0 900 300" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <path class="area" d="M0,196 L70,190 L140,201 L210,185 L280,198 L350,182 L420,193 L490,168 L560,142 L630,101 L700,64 L770,39 L840,21 L900,9 L900,300 L0,300 Z" fill="var(--accent)"/>
+      <path class="line" d="M0,196 L70,190 L140,201 L210,185 L280,198 L350,182 L420,193 L490,168 L560,142 L630,101 L700,64 L770,39 L840,21 L900,9" fill="none" stroke="var(--accent)" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="title-content">
+      <div class="eyebrow">Case study</div>
+      <h1>First-Time Investor <span class="accent-word">Activation</span></h1>
+      <p class="sub">Why deposits stall before the first trade — and why the fix is mostly not AI.</p>
+      <div class="title-meta">
+        <div>Prepared by<span>Arundhati Mahapatro</span></div>
+        <div>Format<span>Product case study · 13 slides</span></div>
+        <div>Core question<span>Is AI the right lens for this problem?</span></div>
+      </div>
     </div>
   </section>
 
   <!-- 2: PROBLEM IN NUMBERS -->
   <section class="slide">
-    <div class="kicker"><span>Problem definition</span><span class="tag">02 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Problem definition</span><span class="tag">02 / 13</span></div>
     <h2>Money moves in. Momentum doesn't.</h2>
     <p class="dek">A first-time investor completes KYC, deposits money — and a large share never place a first trade. This is not a Zerodha-specific quirk; it's a structural pattern across Indian retail investing.</p>
     <div class="body">
@@ -279,7 +331,7 @@
 
   <!-- 3: REAL JOURNEY -->
   <section class="slide">
-    <div class="kicker"><span>Field research</span><span class="tag">03 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Field research</span><span class="tag">03 / 13</span></div>
     <h2>What the app actually shows on day one</h2>
     <p class="dek">Walked a live Kite account rather than assume the flow. Three screens tell most of the story.</p>
     <div class="body">
@@ -305,7 +357,7 @@
 
   <!-- 4: ROOT CAUSES -->
   <section class="slide">
-    <div class="kicker"><span>Diagnosis</span><span class="tag">04 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Diagnosis</span><span class="tag">04 / 13</span></div>
     <h2>Five reasons the freeze happens</h2>
     <p class="dek">Ranked by leverage — the top two explain most of the drop-off.</p>
     <div class="body">
@@ -321,7 +373,7 @@
 
   <!-- 5: WHY IT MATTERS -->
   <section class="slide">
-    <div class="kicker"><span>Stakes</span><span class="tag">05 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Stakes</span><span class="tag">05 / 13</span></div>
     <h2>Why this is worth solving deliberately</h2>
     <div class="body">
       <div class="two-col">
@@ -347,7 +399,7 @@
 
   <!-- 6: AI VERDICT -->
   <section class="slide">
-    <div class="kicker"><span>AI evaluation</span><span class="tag">06 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>AI evaluation</span><span class="tag">06 / 13</span></div>
     <h2>Is AI the right lens? The explicit call.</h2>
     <div class="body">
       <div class="verdict-box">
@@ -364,24 +416,26 @@
 
   <!-- 7: WHERE AI HELPS -->
   <section class="slide">
-    <div class="kicker"><span>AI evaluation</span><span class="tag">07 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>AI evaluation</span><span class="tag">07 / 13</span></div>
     <h2>Where AI earns its place — tightly bounded</h2>
     <p class="dek">Only after the deterministic fix ships. Each use has a hard-coded line it must never cross.</p>
     <div class="body">
-      <table>
-        <thead><tr><th style="width:22%">Use</th><th style="width:40%">What it does</th><th>What it must never do</th></tr></thead>
-        <tbody>
-          <tr><td><span class="pill pill-good">Content sequencing</span></td><td>Personalizes which Varsity module, and in what order, is surfaced from a short intent quiz.</td><td>Recommend a specific stock or fund.</td></tr>
-          <tr><td><span class="pill pill-good">Nudge intelligence</span></td><td>Propensity model: which dormant user gets which nudge, on which channel, when.</td><td>Auto-decide what to invest in on the user's behalf.</td></tr>
-          <tr><td><span class="pill pill-good">In-context explainer</span></td><td>Answers "what does P/E mean," "explain this fund" — strictly educational.</td><td>Answer "should I buy X" — hard-blocked by design.</td></tr>
-        </tbody>
-      </table>
+      <div class="table-card">
+        <table>
+          <thead><tr><th style="width:22%">Use</th><th style="width:40%">What it does</th><th>What it must never do</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill pill-good">Content sequencing</span></td><td>Personalizes which Varsity module, and in what order, is surfaced from a short intent quiz.</td><td>Recommend a specific stock or fund.</td></tr>
+            <tr><td><span class="pill pill-good">Nudge intelligence</span></td><td>Propensity model: which dormant user gets which nudge, on which channel, when.</td><td>Auto-decide what to invest in on the user's behalf.</td></tr>
+            <tr><td><span class="pill pill-good">In-context explainer</span></td><td>Answers "what does P/E mean," "explain this fund" — strictly educational.</td><td>Answer "should I buy X" — hard-blocked by design.</td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </section>
 
   <!-- 8: TARGET USER -->
   <section class="slide">
-    <div class="kicker"><span>Target user</span><span class="tag">08 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Target user</span><span class="tag">08 / 13</span></div>
     <h2>Who this is designed for</h2>
     <div class="body">
       <div class="persona-wrap">
@@ -406,7 +460,7 @@
 
   <!-- 9: SOLUTION -->
   <section class="slide">
-    <div class="kicker"><span>Solution</span><span class="tag">09 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Solution</span><span class="tag">09 / 13</span></div>
     <h2>"First ₹500" — a guided on-ramp</h2>
     <p class="dek">Fully optional and dismissible — the self-directed power-user flow is untouched.</p>
     <div class="body">
@@ -424,7 +478,7 @@
 
   <!-- 10: SOLUTION IN PRODUCT -->
   <section class="slide">
-    <div class="kicker"><span>Solution, in the product</span><span class="tag">10 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Solution, in the product</span><span class="tag">10 / 13</span></div>
     <h2>Not a concept — a working prototype</h2>
     <p class="dek">Five real screens from the clickable prototype, walking the same path a first-timer would tap through.</p>
     <div class="body">
@@ -461,7 +515,7 @@
 
   <!-- 11: TRADEOFFS -->
   <section class="slide">
-    <div class="kicker"><span>Trade-offs &amp; risks</span><span class="tag">11 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Trade-offs &amp; risks</span><span class="tag">11 / 13</span></div>
     <h2>What we're deliberately trading against</h2>
     <div class="body">
       <div class="tradeoff-grid">
@@ -475,7 +529,7 @@
 
   <!-- 11: METRICS -->
   <section class="slide">
-    <div class="kicker"><span>Success measurement</span><span class="tag">12 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Success measurement</span><span class="tag">12 / 13</span></div>
     <h2>How we'll know it worked</h2>
     <div class="body">
       <div class="metric-hero">
@@ -507,7 +561,7 @@
 
   <!-- 12: ROADMAP -->
   <section class="slide">
-    <div class="kicker"><span>Execution</span><span class="tag">13 / 13</span></div>
+    <div class="kicker"><span><i class="spark"></i>Execution</span><span class="tag">13 / 13</span></div>
     <h2>Six-month roadmap</h2>
     <p class="dek">AI enters deliberately late — once the deterministic fix is proven, not as a substitute for it.</p>
     <div class="body">
@@ -603,6 +657,32 @@
 <script>
   const slides = Array.from(document.querySelectorAll('.slide'));
   const countEl = document.getElementById('slideCount');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Progressive-enhancement entrance: slides are opacity:1 by default in CSS
+  // (safe for print/PDF export and no-JS). JS only adds a transient reveal.
+  if (!reduceMotion && 'IntersectionObserver' in window) {
+    slides.forEach((s) => {
+      s.style.opacity = '0';
+      s.style.transform = 'translateY(16px)';
+      s.style.transition = 'opacity .6s cubic-bezier(.16,.9,.3,1), transform .6s cubic-bezier(.16,.9,.3,1)';
+    });
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    slides.forEach((s) => io.observe(s));
+    // Safety net: guarantee every slide is visible before printing, regardless of scroll state.
+    window.addEventListener('beforeprint', () => {
+      slides.forEach((s) => { s.style.opacity = '1'; s.style.transform = 'none'; });
+    });
+  }
+
   function currentIndex() {
     const y = window.scrollY + window.innerHeight * 0.35;
     let idx = 0;
