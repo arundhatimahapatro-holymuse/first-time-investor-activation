@@ -144,6 +144,13 @@
 
   p { line-height: 1.6; color: var(--ink-soft); }
   a { color: var(--accent-ink); }
+  .proto-link {
+    display: inline-flex; align-items: center; gap: 0.5rem; align-self: flex-start;
+    margin-top: 1rem; padding: 0.55rem 1.1rem; border-radius: 30px;
+    background: var(--accent); color: #fff; font-family: var(--mono); font-size: 0.8rem;
+    text-decoration: none; box-shadow: var(--card-shadow); position: relative; z-index: 1;
+  }
+  .proto-link:hover { background: var(--accent-ink); }
   sup { font-family: var(--mono); font-size: 0.65em; color: var(--accent-ink); }
   .sources { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); margin-top: 0.9rem; line-height: 1.6; }
   .sources sup { margin-right: 0.1rem; }
@@ -354,6 +361,10 @@
           <div class="cap-text">The lowest-stakes first action (a SIP) sits several taps deep, behind vocabulary a beginner hasn't learned yet.</div>
         </div>
       </div>
+      <div class="assumption-note">
+        <div class="assumption-label">Same pattern, desktop web</div>
+        <p>The Kite dashboard's only real CTA for an empty account is "Start investing" — a good instinct. But it drops straight into a raw instrument search. Searching the natural phrase a beginner would actually type, "mutual fund," returns unexplained exchange codes — GOLDBETA, SBISENSEX, TSIFDG, NCAPBULADD — with no curation, no plain-English label, no "start here." The guidance ends exactly where the user needed it most.</p>
+      </div>
     </div>
   </section>
 
@@ -470,6 +481,7 @@
     <div class="kicker"><span><i class="spark"></i>Solution, in the product</span><span class="tag">09 / 12</span></div>
     <h2>"First ₹500" — a guided on-ramp</h2>
     <p class="dek">Not just a concept — five real screens from the clickable prototype, walking the same path a first-timer would tap through. Fully optional; the self-directed flow is untouched.</p>
+    <a class="proto-link" href="https://arundhatimahapatro-holymuse.github.io/first-time-investor-activation/prototype/" target="_blank" rel="noopener">&#9654; Try the live, clickable prototype</a>
     <div class="body">
       <div class="screens-row screens-row-5">
         <div class="screen-card">
@@ -513,7 +525,7 @@
           <thead><tr><th style="width:17%">Dimension</th><th style="width:41%">Trade-off / risk</th><th>How we handle it</th></tr></thead>
           <tbody>
             <tr><td><b>Complexity</b></td><td>Multi-path routing (self-directed vs. guided vs. lessons) adds real branching logic to build and maintain.</td><td>Ship the single deterministic path first (month 1&ndash;3); other branches are additive, not blocking.</td></tr>
-            <tr><td><b>Cost</b></td><td>Propensity modeling and personalized nudges need real data-infrastructure investment.</td><td>AI spend is sequenced to month 5&ndash;6, after the free UX fix has already proven the lift.</td></tr>
+            <tr><td><b>Cost</b></td><td>Propensity modeling, AI search, and AI calling all need real infrastructure and compliance investment.</td><td>AI spend is sequenced to month 3&ndash;6, scoped first and piloted small, after the free UX fix has already proven the lift.</td></tr>
             <tr><td><b>User trust</b></td><td>Any default nudge risks diluting "we never push products" — the core trust brand.</td><td>Every default is framed as informational, never a recommendation, and fully skippable.</td></tr>
             <tr><td><b>Product suitability</b></td><td>A single ₹500 index-SIP default may not fit every income or risk profile.</td><td>Default is deliberately generic and low-stakes; self-directed paths stay fully open.</td></tr>
             <tr><td><b>Safety</b></td><td>AI-generated text near financial decisions is a mis-selling risk if it drifts into advice.</td><td>Hard-coded refusal pattern, templated/compliance-reviewed copy, no free generation near security names.</td></tr>
@@ -563,9 +575,9 @@
   <section class="slide">
     <div class="kicker"><span><i class="spark"></i>Execution</span><span class="tag">12 / 12</span></div>
     <h2>Six-month roadmap</h2>
-    <p class="dek">AI enters deliberately late — once the deterministic fix is proven, not as a substitute for it.</p>
+    <p class="dek">AI design starts month 3, first bounded pilots ship month 4 — after the deterministic fix is proven, never as a substitute for it.</p>
     <div class="body">
-      <svg class="gantt" viewBox="0 0 900 178" role="img" aria-label="Six month roadmap Gantt chart, AI involvement begins month five" xmlns="http://www.w3.org/2000/svg">
+      <svg class="gantt" viewBox="0 0 900 178" role="img" aria-label="Six month roadmap Gantt chart, bounded AI pilots begin shipping month four" xmlns="http://www.w3.org/2000/svg">
         <text x="0" y="14" font-family="var(--mono)" font-size="10" letter-spacing="0.06em" fill="var(--muted)">MONTH</text>
         <g font-family="var(--mono)" font-size="10" fill="var(--muted)">
           <text x="141" y="14" text-anchor="middle">1</text>
@@ -579,29 +591,29 @@
           <rect x="80" y="24" width="122" height="52" rx="6" fill="var(--gantt-noai)"/>
           <rect x="210" y="24" width="122" height="52" rx="6" fill="var(--gantt-noai)"/>
           <rect x="340" y="24" width="122" height="52" rx="6" fill="var(--gantt-noai)"/>
-          <rect x="470" y="24" width="122" height="52" rx="6" fill="var(--gantt-noai)"/>
+          <rect x="470" y="24" width="122" height="52" rx="6" fill="var(--gantt-ai)"/>
           <rect x="600" y="24" width="122" height="52" rx="6" fill="var(--gantt-ai)"/>
           <rect x="730" y="24" width="122" height="52" rx="6" fill="var(--gantt-ai)"/>
         </g>
         <g font-family="var(--sans)" fill="#fff">
           <text x="94" y="46" font-size="12" font-weight="700">Foundation</text>
-          <text x="94" y="61" font-size="9.5" opacity="0.9">Instrumentation</text>
+          <text x="94" y="61" font-size="9.5" opacity="0.9">+ CX journey</text>
           <text x="224" y="46" font-size="12" font-weight="700">MVP</text>
           <text x="224" y="61" font-size="9.5" opacity="0.9">Ship the on-ramp</text>
           <text x="354" y="46" font-size="12" font-weight="700">Iterate</text>
-          <text x="354" y="61" font-size="9.5" opacity="0.9">Measure &amp; fix</text>
+          <text x="354" y="61" font-size="9.5" opacity="0.9">Measure + AI design</text>
           <text x="484" y="46" font-size="12" font-weight="700">Re-engage</text>
-          <text x="484" y="61" font-size="9.5" opacity="0.9">Bring back dormant</text>
+          <text x="484" y="61" font-size="9.5" opacity="0.9">AI search pilot</text>
           <text x="614" y="46" font-size="12" font-weight="700">Pilot</text>
-          <text x="614" y="61" font-size="9.5" opacity="0.9">Bounded AI</text>
+          <text x="614" y="61" font-size="9.5" opacity="0.9">AI calling pilot</text>
           <text x="744" y="46" font-size="12" font-weight="700">Scale</text>
           <text x="744" y="61" font-size="9.5" opacity="0.9">Institutionalize</text>
         </g>
-        <line x1="600" y1="24" x2="600" y2="122" stroke="var(--gantt-ai)" stroke-width="1.5" stroke-dasharray="3,3"/>
-        <text x="606" y="94" font-family="var(--mono)" font-size="10" fill="var(--gantt-ai)">AI enters here</text>
+        <line x1="470" y1="24" x2="470" y2="122" stroke="var(--gantt-ai)" stroke-width="1.5" stroke-dasharray="3,3"/>
+        <text x="476" y="94" font-family="var(--mono)" font-size="10" fill="var(--gantt-ai)">AI enters here</text>
         <text x="0" y="112" font-family="var(--mono)" font-size="10" letter-spacing="0.06em" fill="var(--muted)">AI ON</text>
         <rect x="80" y="100" width="772" height="14" rx="7" fill="none" stroke="var(--line)" stroke-width="1"/>
-        <rect x="600" y="100" width="252" height="14" rx="7" fill="var(--gantt-ai)"/>
+        <rect x="470" y="100" width="382" height="14" rx="7" fill="var(--gantt-ai)"/>
         <g font-family="var(--sans)" font-size="11" fill="var(--ink-soft)">
           <rect x="80" y="148" width="12" height="12" rx="3" fill="var(--gantt-noai)"/>
           <text x="98" y="158">No AI — deterministic UX &amp; content</text>
@@ -613,32 +625,32 @@
         <div class="rm-row">
           <div class="rm-month">Month 1</div>
           <div class="rm-phase">Foundation</div>
-          <div><div class="rm-focus">Instrumentation &amp; research</div><div class="rm-ships">Baseline activation measurement, deposit→first-trade event tracking, 10&ndash;15 first-timer interviews, compliance review of guided-path language.</div><span class="pill pill-warn">No AI</span></div>
+          <div><div class="rm-focus">Instrumentation, research &amp; CX journey</div><div class="rm-ships">Baseline activation measurement, deposit→first-trade event tracking, 10&ndash;15 first-timer interviews, compliance review of guided-path language — synthesized into a documented CX journey map (VoC, onboarding walkthrough, desktop-search findings) that becomes the reference for everything shipped after.</div><span class="pill pill-warn">No AI</span></div>
         </div>
         <div class="rm-row">
           <div class="rm-month">Month 2</div>
           <div class="rm-phase">MVP</div>
-          <div><div class="rm-focus">Ship the deterministic on-ramp</div><div class="rm-ships">Start Here card, 2-question router, 3 static paths, ₹500 index-SIP default — A/B on new-signup cohort.</div><span class="pill pill-warn">No AI</span></div>
+          <div><div class="rm-focus">Ship the deterministic on-ramp</div><div class="rm-ships">Start Here card, multi-select intent router, static paths incl. human-callback request, ₹500 index-SIP default — A/B on new-signup cohort.</div><span class="pill pill-warn">No AI</span></div>
         </div>
         <div class="rm-row">
           <div class="rm-month">Month 3</div>
           <div class="rm-phase">Iterate</div>
-          <div><div class="rm-focus">Measure &amp; fix</div><div class="rm-ships">Analyze 30-day activation lift and time-to-first-investment; fix drop-off points; expand paths using real routing data.</div><span class="pill pill-warn">No AI</span></div>
+          <div><div class="rm-focus">Measure, fix &amp; scope the AI pilots</div><div class="rm-ships">Analyze 30-day activation lift and time-to-first-investment; fix drop-off points; expand paths using real routing data. In parallel: design + compliance-scope two bounded AI experiments — natural-language search/discovery, and an outbound AI-calling script for dormant users.</div><span class="pill pill-warn">No AI</span></div>
         </div>
         <div class="rm-row">
           <div class="rm-month">Month 4</div>
           <div class="rm-phase">Re-engagement</div>
-          <div><div class="rm-focus">Bring back the dormant</div><div class="rm-ships">Rules-based Day 1/3/7 nudges across push/email/WhatsApp, frequency capping, opt-out.</div><span class="pill pill-warn">No AI</span></div>
+          <div><div class="rm-focus">Bring back the dormant + AI search pilot</div><div class="rm-ships">Rules-based Day 1/3/7 nudges across push/email/WhatsApp, frequency capping, opt-out. Pilot AI-assisted search: a generic query like "mutual fund" returns a curated, plain-English shortlist instead of raw ticker codes — zero personalized recommendation, purely a discovery aid.</div><span class="pill pill-good">Bounded AI</span></div>
         </div>
         <div class="rm-row">
           <div class="rm-month">Month 5</div>
           <div class="rm-phase">Pilot</div>
-          <div><div class="rm-focus">Add AI where it's earned its place</div><div class="rm-ships">Propensity model for nudge personalization; bounded in-context explainer with hard guardrails, compliance sign-off; pilot on a small % of dormant users.</div><span class="pill pill-good">Bounded AI</span></div>
+          <div><div class="rm-focus">Nudge AI + AI-calling pilot</div><div class="rm-ships">Propensity model for nudge timing/channel; bounded in-context explainer with hard guardrails, compliance sign-off. Pilot outbound AI calling on a small dormant cohort — scripted, compliance-reviewed, hands off to a human for anything off-script, never recommends a security.</div><span class="pill pill-good">Bounded AI</span></div>
         </div>
         <div class="rm-row">
           <div class="rm-month">Month 6</div>
           <div class="rm-phase">Scale</div>
-          <div><div class="rm-focus">Institutionalize</div><div class="rm-ships">Roll out AI-personalized nudges fully if pilot metrics hold; Activation Rate becomes a tracked company metric with a guardrail dashboard.</div><span class="pill pill-good">Bounded AI</span></div>
+          <div><div class="rm-focus">Institutionalize</div><div class="rm-ships">Roll out whichever AI experiments proved lift — search discovery, propensity-driven nudges, AI calling; Activation Rate becomes a tracked company metric with a guardrail dashboard.</div><span class="pill pill-good">Bounded AI</span></div>
         </div>
       </div>
     </div>

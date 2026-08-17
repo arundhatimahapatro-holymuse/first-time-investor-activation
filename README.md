@@ -14,7 +14,7 @@ Author: Arundhati Mahapatro
 - **AI verdict:** **AI can be a catalyst here — it's very difficult for it to be the whole solution.** This is ~70% UX/content/product-structure and ~30% narrowly-scoped AI (content sequencing + nudge personalization — never stock recommendations). Leadership's "solve it with AI" framing is the wrong default and the assignment explicitly rewards saying so.
 - **Solution:** A **"First ₹500"** guided on-ramp — a dismissible "Start Here" card, a multi-select intent router (not advice), a tiny reversible first action (₹500 index-fund SIP), in-context micro-education, an on-demand "talk to a person" option, and risk-modeled re-engagement nudges for users who deposit and go quiet.
 - **Goal & mother metric:** Increase activation % for first-time investors — % who invest at least once within 30 days of first deposit.
-- **Sequencing:** Ship the deterministic UX fix in month 1–3. Layer AI only in month 4–6, once the baseline flow is proven — not before.
+- **Sequencing:** Ship the deterministic UX fix in month 1–3 (month 1 also turns all this research into a documented CX journey map). AI design starts month 3, first bounded pilots — AI-assisted search discovery, then an AI-calling nudge experiment — ship month 4 and 5, once the baseline flow is already proven.
 
 ---
 
@@ -41,6 +41,8 @@ Before framing the problem, I walked the actual Kite app end to end — both the
 | ![Orders / SIPs](assets/screens/orders_sips.png) | SIPs live inside the *Orders* tab, several taps deep, alongside GTT/Baskets/Alerts — power-user vocabulary. | The single lowest-stakes first action (a SIP) is buried behind terminology a beginner hasn't learned yet. |
 | ![Bids — empty state](assets/screens/bids_empty.png) | An empty state ("no securities available") with no explanatory content or next step. | Representative of how empty/neutral states across the app default to silence rather than guidance. |
 | ![Profile / Console](assets/screens/profile_console.png) | Education (Varsity) and reporting (Console) live behind the profile menu — decoupled from the watchlist/order flow where the decision actually happens. | Confirms: **content exists, but is not in the flow.** Learning is homework, not help. |
+
+**Same pattern, desktop web:** the Kite dashboard's only real CTA for an empty account is *"Start investing"* — a good instinct. But it drops straight into a raw instrument search. Searching the natural phrase a beginner would actually type, *"mutual fund,"* returns unexplained exchange codes — GOLDBETA, SBISENSEX, TSIFDG, NCAPBULADD — with no curation, no plain-English label, no "start here." The guidance ends exactly where the user needed it most.
 
 This grounds the problem in what the product actually does today, not a hypothetical.
 
@@ -127,7 +129,7 @@ This is **not** the trader persona who came for F&O/intraday — that segment se
 
 ## 7. Solution — "First ₹500"
 
-A guided on-ramp, fully optional/skippable so the self-directed power-user experience is untouched.
+A guided on-ramp, fully optional/skippable so the self-directed power-user experience is untouched. **[Try the live, clickable prototype →](https://arundhatimahapatro-holymuse.github.io/first-time-investor-activation/prototype/)**
 
 1. **Trigger moment** — right after first deposit clears, a dismissible **"Start Here"** card appears on the Watchlist home (see prototype) — persists until first investment, never a mandatory wizard.
 2. **Intent check, multi-select** (routing, not advice) — *"What's this money for?"* (pick all that apply) then *"Pick stocks yourself, start simpler, or talk to someone?"* — routes to one of several pre-built, non-personalized paths. Never recommends an individual security.
@@ -147,7 +149,7 @@ Every dimension the assignment calls out, walked through explicitly:
 | Dimension | Trade-off / risk | How we handle it |
 |---|---|---|
 | **Complexity** | Multi-path routing (self-directed vs. guided vs. lessons vs. human) adds real branching logic to build and maintain. | Ship the single deterministic path first (month 1–3); other branches are additive, not blocking. |
-| **Cost** | Propensity modeling and personalized nudges need real data-infrastructure investment. | AI spend is sequenced to month 5–6, after the free UX fix has already proven the lift. |
+| **Cost** | Propensity modeling, AI search, and AI calling all need real infrastructure and compliance investment. | AI spend is sequenced to month 3–6, scoped first and piloted small, after the free UX fix has already proven the lift. |
 | **User trust** | Any default nudge risks diluting "we never push products" — the core trust brand. | Every default is framed as informational, never a recommendation, and fully skippable. |
 | **Financial-product suitability** | A single ₹500 index-SIP default may not fit every income or risk profile. | Default is deliberately generic and low-stakes; self-directed and human-assisted paths stay fully open. |
 | **Safety** | AI-generated text near financial decisions is a mis-selling risk if it drifts into advice. | Hard-coded refusal pattern, templated/compliance-reviewed copy, no free generation near security names. |
@@ -168,18 +170,18 @@ Every dimension the assignment calls out, walked through explicitly:
 
 ## 10. Six-month roadmap
 
-<img src="assets/roadmap-gantt.svg" alt="Six month roadmap Gantt chart: Foundation, MVP, Iterate, and Re-engagement run months 1-4 with no AI; bounded AI enters in the Pilot phase, month 5, and continues through Scale, month 6." width="100%" />
+<img src="assets/roadmap-gantt.svg" alt="Six month roadmap Gantt chart: Foundation, MVP, and Iterate run months 1-3 with no AI; bounded AI pilots begin shipping in month 4 (search discovery), month 5 (AI calling), and continue through Scale, month 6." width="100%" />
 
 | Phase | Month | Focus | Ships | AI involved? |
 |---|---|---|---|---|
-| 0 · Foundation | 1 | Instrumentation & research | Baseline activation-rate measurement, deposit→first-trade event tracking, 10–15 first-timer interviews, Varsity content audit, compliance review of guided-path language | No |
+| 0 · Foundation | 1 | Instrumentation, research & CX journey | Baseline activation-rate measurement, deposit→first-trade event tracking, 10–15 first-timer interviews, compliance review of guided-path language — synthesized into a documented CX journey map (VoC, onboarding walkthrough, desktop-search findings) that becomes the reference for everything shipped after | No |
 | 1 · Deterministic MVP | 2 | Ship the on-ramp | "Start Here" card, multi-select intent router, static paths incl. human-callback request, ₹500 index-SIP default, in-context lesson cards — A/B on new-signup cohort | No |
-| 1 · Iterate | 3 | Measure & fix | Analyze 30-day activation lift & time-to-first-investment, fix drop-off points, expand static paths based on real routing-answer data | No |
-| 2 · Re-engagement | 4 | Bring back the dormant | Day 1/3/7 nudges (rules-based, not ML) across push/email/WhatsApp, frequency capping, opt-out, measure nudge-driven activation lift | No |
-| 3 · Bounded AI pilot | 5 | Add AI where it's earned its place | Propensity model for nudge timing/channel personalization; bounded in-context explainer with hard advice-guardrails, compliance sign-off; pilot on a small % of dormant users | Yes — narrow, supporting only |
-| 3 · Scale | 6 | Institutionalize | Roll out AI-personalized nudges fully if pilot metrics hold; activation rate becomes a tracked company metric with a guardrail dashboard; plan phase-2 backlog (richer path personalization) | Yes — scaled, still bounded |
+| 1 · Iterate | 3 | Measure, fix & scope the AI pilots | Analyze 30-day activation lift & time-to-first-investment, fix drop-off points, expand static paths based on real routing-answer data. In parallel: design + compliance-scope two bounded AI experiments — natural-language search/discovery, and an outbound AI-calling script for dormant users | No |
+| 2 · Re-engagement + AI search pilot | 4 | Bring back the dormant | Day 1/3/7 nudges (rules-based, not ML) across push/email/WhatsApp, frequency capping, opt-out. Pilot AI-assisted search: a generic query like "mutual fund" returns a curated, plain-English shortlist instead of raw ticker codes — zero personalized recommendation, purely a discovery aid | Yes — narrow, supporting only |
+| 3 · Nudge AI + AI-calling pilot | 5 | Add AI where it's earned its place | Propensity model for nudge timing/channel; bounded in-context explainer with hard advice-guardrails, compliance sign-off. Pilot outbound AI calling on a small dormant cohort — scripted, compliance-reviewed, hands off to a human for anything off-script, never recommends a security | Yes — narrow, supporting only |
+| 3 · Scale | 6 | Institutionalize | Roll out whichever AI experiments proved lift — search discovery, propensity-driven nudges, AI calling; activation rate becomes a tracked company metric with a guardrail dashboard | Yes — scaled, still bounded |
 
-AI enters deliberately late — once the deterministic fix is proven, not as a substitute for it.
+AI design starts month 3, first bounded pilots ship month 4 — after the deterministic fix is proven, never as a substitute for it.
 
 ---
 
